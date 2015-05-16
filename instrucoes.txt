@@ -1,0 +1,5 @@
+Windows
+http://stackoverflow.com/questions/21562038/node-gyp-build-error-windows-x64
+
+Linux
+sudo apt-get install node-gyp
