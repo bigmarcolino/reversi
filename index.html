@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+	#ex {
+		background-color: #CCC;
+		width: 15px;
+		height: 15px;
+		display: flex;
+		justify-content: center; /* align horizontal */
+		align-items: center;
+		border-top-left-radius: 2px;
+		transition: background-color 610ms;
+		float:left;
+	}
+	#ex:hover {
+		background-color: red;
+	}
+</style>
+
+<script>
+	window.onload = function(){
+		
+		var  v = ["", ".", "..", "..."];
+		var i = 0;
+		setInterval(function () {
+			i %= 4;
+			document.getElementById("loading").innerHTML = v[i];
+			i++ ;
+		}, 500);
+
+		function Retangulo(x,y){
+			this.x = (x === undefined) ? 0 : x;
+			this.y = (y === undefined) ? 0 : y;
+		}
+
+		Retangulo.prototype.area = function(){
+			return this.x * this.y;
+		}
+
+		var r = new Retangulo(10,25);
+		console.log("->> " + r.area());
+		
+	};
+</script>
+</head>
+
+<body>
+	<pre style="line-height: 7.54px; font-size: 13px;">
++-----------------------+	
+|x|x|x<span style="color:blue">x</span>                 |
+|x|x|                   |
+|x|x|                   |
+|                       |
+|                       |
+|                       |
+|                       |
+|                       |
++-----------------------+
+
+&#x250C;&#x2500;&#9488;&#x2500;+-+-
+&#9474;a&#9474;x|a|
+&#9492;&#x2500;&#9496;&#x2500;+-+-
+
++-+-+-+-+
+|a|b|c|d|
++-+-+-+-+
+|e|f|<span style="color:blue">g</span>|h|
++-+-+-+-+
+|<span style="color:blue">i</span>|j|k|l|
++-+-+-+-+
+|<span style="color:blue">m</span>|n|o|<span style="color:blue">p</span>|
++-+-+-+-+
+
+	</pre>
+	
+	<div style="width:75px; height: 75px; background-color: #DDD";>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+		<div id="ex">?</div>
+	</div>
+			
+	<pre id="loading">
+	</pre>
+	
+
+
+	<!-- 
+	12 -> 13
+	44 -> 48
+	quadrado: 28 -> 48, 7.54 -> 13 (lh = 0.58*fs)
+	line-height: font-size - (0.9 * font-size) arredondado pra baixo
+	-->
+</body>
+</html>
