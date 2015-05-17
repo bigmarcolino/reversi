@@ -3,6 +3,9 @@
 
 <head>
 <style>
+	#container{
+		margin: 0 auto 0 auto;
+	}
 	#ex {
 		background-color: #CCC;
 		width: 15px;
@@ -29,53 +32,55 @@
 			document.getElementById("loading").innerHTML = v[i];
 			i++ ;
 		}, 500);
-
-		function Retangulo(x,y){
-			this.x = (x === undefined) ? 0 : x;
-			this.y = (y === undefined) ? 0 : y;
-		}
-
-		Retangulo.prototype.area = function(){
-			return this.x * this.y;
-		}
-
-		var r = new Retangulo(10,25);
-		console.log("->> " + r.area());
 		
+		var Tipo = {
+			VAZIO : 0,
+			JOGADOR1: 1,
+			JOGADOR2: 2
+		};
+		
+		function Casa(tipo, dimensao){				
+			this.tipo = tipo;
+			this.dimensao = dimensao;	
+		}
+		
+		Casa.prototype.toString = function(){
+			return this.tipo + ", " + this.dimensao + " x " + this.dimensao;
+		}
+		
+		function Tabuleiro(dimensao){
+			this.qtdQuadrados = 8;
+			this.dimensaoMinima = 100;
+			this.dimensao = (dimensao === undefined) ? 600 : dimensao;			
+			//dimensao sempre ser multiplo de 8
+			// nao deixar ser menor que dimensao minima
+			this.casas = new Array(this.qtdQuadrados);
+			
+			for (var i = 0; i < this.qtdQuadrados; i++)	
+				this.casas[i] = new Array(this.qtdQuadrados);
+				
+			for (var i = 0; i < this.casas.length; i++)	
+				for (var j = 0; j < this.casas[i].length; j++)
+					this.casas[i][j] = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);	
+		}
+		
+		Tabuleiro.prototype.toString = function(){
+			var buff = "";
+			for (var i = 0; i < this.casas.length; i++)	
+				for (var j = 0; j < this.casas[i].length; j++)
+					buff += i + ", " + j + ", " + this.casas[i][j].toString() + "\n";
+			return buff;
+		}
+		
+		var t = new Tabuleiro();
+		console.log(t.toString());
 	};
 </script>
 </head>
 
 <body>
-	<pre style="line-height: 7.54px; font-size: 13px;">
-+-----------------------+	
-|x|x|x<span style="color:blue">x</span>                 |
-|x|x|                   |
-|x|x|                   |
-|                       |
-|                       |
-|                       |
-|                       |
-|                       |
-+-----------------------+
-
-&#x250C;&#x2500;&#9488;&#x2500;+-+-
-&#9474;a&#9474;x|a|
-&#9492;&#x2500;&#9496;&#x2500;+-+-
-
-+-+-+-+-+
-|a|b|c|d|
-+-+-+-+-+
-|e|f|<span style="color:blue">g</span>|h|
-+-+-+-+-+
-|<span style="color:blue">i</span>|j|k|l|
-+-+-+-+-+
-|<span style="color:blue">m</span>|n|o|<span style="color:blue">p</span>|
-+-+-+-+-+
-
-	</pre>
 	
-	<div style="width:75px; height: 75px; background-color: #DDD";>
+	<div id="container" style="width:600px; height: 600px; background-color: #DDD";>
 		<div id="ex">?</div>
 		<div id="ex">?</div>
 		<div id="ex">?</div>
