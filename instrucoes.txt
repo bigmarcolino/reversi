@@ -8,3 +8,7 @@ sudo apt-get update
 sudo apt-get install nodejs
 
 sudo apt-get install npm
+
+Para instalar as dependências de um projeto:
+npm install (no diretório que contêm o arquivo package.json)
+
