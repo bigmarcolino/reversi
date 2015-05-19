@@ -30,7 +30,15 @@
 <script src="jquery-2.1.4.js"></script>
 <script>
 	window.onload = function(){
+		var Tipo = {
+			VAZIO : 0,
+			JOGADOR1: 1,
+			JOGADOR2: 2
+		};
 		
+		var vez = Tipo.JOGADOR1;
+		
+		// ---------------------------------------------------
 		var  v = ["", ".", "..", "..."];
 		var i = 0;
 		setInterval(function () {
@@ -38,12 +46,8 @@
 			document.getElementById("loading").innerHTML = v[i];
 			i++ ;
 		}, 500);
-		
-		var Tipo = {
-			VAZIO : 0,
-			JOGADOR1: 1,
-			JOGADOR2: 2
-		};
+		// ---------------------------------------------------
+
 		
 		function Casa(tipo, dimensao){				
 			this.tipo = tipo;
@@ -78,8 +82,7 @@
 			with (this.div.style){
 				height = width = dimensao+"px";
 			}			
-			//dimensao sempre ser multiplo de 8
-			// nao deixar ser menor que dimensao minima
+
 			this.casas = new Array(this.qtdQuadrados);
 			
 			for (var i = 0; i < this.qtdQuadrados; i++)	
@@ -130,43 +133,55 @@
 			for (var i = 0; i < this.casas.length; i++)	
 				for (var j = 0; j < this.casas[i].length; j++){
 					this.casas[i][j].dimensao = this.dimensao / this.qtdQuadrados;	
-					this.casas[i][j].refresh();
+					this.casas[i][j].refresh();				
 				}
 
 		}
 		
-		// add funcao para resize
+		$("#vez").text("Jogador " + vez);
 
-		var t = new Tabuleiro("container", 600, 8);
+		var t = new Tabuleiro("container", 580, 8);
 		t.casas[3][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
 		t.casas[4][3].tipo = Tipo.JOGADOR2;
 		t.refresh();
+		
+		for (var i = 0; i < t.casas.length; i++)	
+			for (var j = 0; j < t.casas[i].length; j++){
+				t.casas[i][j].div.addEventListener("click", function(event){
+					selecionarCasa(event.target);
+				});	
+			}
 
 		$(window).bind('mousewheel', function(event) {
 			if (event.originalEvent.wheelDelta >= 0) {
-				t.dimensao+=5;
+				t.dimensao += 5;
 			}
 			else {
-				t.dimensao-=5;
+				t.dimensao -= 5;
 			}
 			t.refresh();
 		});
 
+		// trocar de vez, atualizar campo, extrair ij da div, aplicar regras do jogo
+		// trocar variavel vez para um objeto do tipo Jogador
+		function selecionarCasa(casa){
+			console.log(casa);
+		}		
+		
 		//console.log(t.toString());
 	};
+	
 	
 
 </script>
 </head>
 
 <body>
+	<p id="vez"></p>
 	
 	<div id="container">
-	</div>
-	
-	<div id="c">
 	</div>
 			
 	<pre id="loading">
