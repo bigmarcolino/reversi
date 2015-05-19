@@ -4,7 +4,7 @@
 <head>
 <style>
 	#container{
-		margin: 0 auto 0 auto;
+		margin: 10px auto 10px auto;
 	}
 		
 	.casa {
@@ -143,14 +143,30 @@
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
 		t.casas[4][3].tipo = Tipo.JOGADOR2;
 		t.refresh();
+
+		$(window).bind('mousewheel', function(event) {
+			if (event.originalEvent.wheelDelta >= 0) {
+				t.dimensao+=5;
+			}
+			else {
+				t.dimensao-=5;
+			}
+			t.refresh();
+		});
+
 		//console.log(t.toString());
 	};
+	
+
 </script>
 </head>
 
 <body>
 	
 	<div id="container">
+	</div>
+	
+	<div id="c">
 	</div>
 			
 	<pre id="loading">
