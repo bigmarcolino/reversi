@@ -20,10 +20,10 @@
 		background-color: red;
 	}
 	
-	.casa-top-left { border-top-left-radius: 25px }
+	/*.casa-top-left { border-top-left-radius: 25px }
 	.casa-top-right { border-top-right-radius: 25px }
 	.casa-bottom-left { border-bottom-left-radius: 25px; }
-	.casa-bottom-right { border-bottom-right-radius: 25px; }
+	.casa-bottom-right { border-bottom-right-radius: 25px; }*/
 	
 </style>
 
@@ -69,6 +69,8 @@
 			this.dimensao = dimensao;
 			this.id = id;
 			this.div = document.getElementById(this.id);
+			this.raioBorda = dimensao / 24;
+			
 			with (this.div.style){
 				height = width = dimensao+"px";
 			}			
@@ -89,13 +91,13 @@
 					casa.div.innerHTML = casa.div.id; /*debug*/
 				
 					if (i == 0 && j == 0)
-						$(casa.div).addClass("casa-top-left");
+						casa.div.style.borderTopLeftRadius = this.raioBorda+"px";
 					if (i == 0 && j == iLimite)
-						$(casa.div).addClass("casa-top-right");
+						casa.div.style.borderTopRightRadius = this.raioBorda+"px";
 					if (i == iLimite && j == 0)
-						$(casa.div).addClass("casa-bottom-left");
+						casa.div.style.borderBottomLeftRadius = this.raioBorda+"px";
 					if (i == iLimite && j == iLimite)
-						$(casa.div).addClass("casa-bottom-right");
+						casa.div.style.borderBottomRightRadius = this.raioBorda+"px";
 						
 					this.casas[i][j] = casa;
 											
@@ -118,8 +120,6 @@
 		// add funcao para resize
 		// id da casa = id do container + casaij
 
-		// border radius calculado em relacao ao tabuleiro
-		
 		var t = new Tabuleiro("container", 600);
 		//console.log(t.toString());
 	};
