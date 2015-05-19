@@ -63,9 +63,8 @@
 			return div;
 		}
 		
-		function Tabuleiro(id, dimensao){
-			this.qtdQuadrados = 8;
-			this.dimensaoMinima = 100;
+		function Tabuleiro(id, dimensao, qtdQuadrados){
+			this.qtdQuadrados = qtdQuadrados;
 			this.dimensao = dimensao;
 			this.id = id;
 			this.div = document.getElementById(this.id);
@@ -88,7 +87,7 @@
 					casa = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);
 					casa.div.id = "c"+i+""+j;
 					
-					casa.div.innerHTML = casa.div.id; /*debug*/
+					casa.div.innerHTML = "";//casa.div.id; /*debug*/
 				
 					if (i == 0 && j == 0)
 						casa.div.style.borderTopLeftRadius = this.raioBorda+"px";
@@ -116,11 +115,10 @@
 			return buff;
 		}
 		
-		// passar id do container e tamanho como parametro
 		// add funcao para resize
 		// id da casa = id do container + casaij
 
-		var t = new Tabuleiro("container", 600);
+		var t = new Tabuleiro("container", 100, 8);
 		//console.log(t.toString());
 	};
 </script>
