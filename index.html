@@ -63,6 +63,11 @@
 			return div;
 		}
 		
+		Casa.prototype.refresh = function(){
+			this.div.innerHTML = this.tipo;
+			with (this.div.style) width = height = this.dimensao + "px";
+		}
+		
 		function Tabuleiro(id, dimensao, qtdQuadrados){
 			this.qtdQuadrados = qtdQuadrados;
 			this.dimensao = dimensao;
@@ -85,9 +90,10 @@
 			for (var i = 0; i < this.casas.length; i++)	
 				for (var j = 0; j < this.casas[i].length; j++){
 					casa = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);
-					casa.div.id = "c"+i+""+j;
 					
-					casa.div.innerHTML = "";//casa.div.id; /*debug*/
+					casa.div.id = "c"+i+""+j;	
+									
+					//casa.div.innerHTML = casa.div.id; /*debug*/
 				
 					if (i == 0 && j == 0)
 						casa.div.style.borderTopLeftRadius = this.raioBorda+"px";
@@ -115,10 +121,29 @@
 			return buff;
 		}
 		
+		// atualizar propriedade do objeto -> atualizar div
+		Tabuleiro.prototype.refresh = function(){
+			with (this.div.style){
+				height = width = this.dimensao+"px";
+			}	
+		
+			for (var i = 0; i < this.casas.length; i++)	
+				for (var j = 0; j < this.casas[i].length; j++){
+					this.casas[i][j].dimensao = this.dimensao / this.qtdQuadrados;	
+					this.casas[i][j].refresh();
+				}
+
+		}
+		
 		// add funcao para resize
 		// id da casa = id do container + casaij
 
-		var t = new Tabuleiro("container", 100, 8);
+		var t = new Tabuleiro("container", 600, 8);
+		t.casas[3][3].tipo = Tipo.JOGADOR1;
+		t.casas[4][4].tipo = Tipo.JOGADOR1;
+		t.casas[3][4].tipo = Tipo.JOGADOR2;
+		t.casas[4][3].tipo = Tipo.JOGADOR2;
+		t.refresh();
 		//console.log(t.toString());
 	};
 </script>
