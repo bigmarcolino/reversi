@@ -91,7 +91,7 @@
 				for (var j = 0; j < this.casas[i].length; j++){
 					casa = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);
 					
-					casa.div.id = "c"+i+""+j;	
+					casa.div.id = this.id+i+""+j;	
 									
 					//casa.div.innerHTML = casa.div.id; /*debug*/
 				
@@ -136,7 +136,6 @@
 		}
 		
 		// add funcao para resize
-		// id da casa = id do container + casaij
 
 		var t = new Tabuleiro("container", 600, 8);
 		t.casas[3][3].tipo = Tipo.JOGADOR1;
