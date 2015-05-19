@@ -8,8 +8,8 @@
 	}
 	#ex {
 		background-color: #CCC;
-		width: 15px;
-		height: 15px;
+		width: 60px;
+		height: 60px;
 		display: flex;
 		justify-content: center; /* align horizontal */
 		align-items: center;
@@ -20,8 +20,28 @@
 	#ex:hover {
 		background-color: red;
 	}
+	
+	.casa {
+		background-color: #CCC;
+		display: flex;
+		justify-content: center; /* align horizontal */
+		align-items: center;
+		transition: background-color 610ms;
+		float:left;
+	}
+	
+	.casa:hover {
+		background-color: red;
+	}
+	
+	.casa-top-left { border-top-left-radius: 10px }
+	.casa-top-right { border-top-right-radius: 10px }
+	.casa-bottom-left { border-bottom-left-radius: 10px; }
+	.casa-bottom-right { border-bottom-right-radius: 10px; }
+	
 </style>
 
+<script src="jquery-2.1.4.js"></script>
 <script>
 	window.onload = function(){
 		
@@ -48,6 +68,14 @@
 			return this.tipo + ", " + this.dimensao + " x " + this.dimensao;
 		}
 		
+		Casa.prototype.toHTML = function(){
+			var div = document.createElement("div");
+			$(div).addClass("casa");
+			div.innerHTML = this.tipo;
+			with (div.style) width = height = this.dimensao + "px";
+			return div;
+		}
+		
 		function Tabuleiro(dimensao){
 			this.qtdQuadrados = 8;
 			this.dimensaoMinima = 100;
@@ -60,8 +88,10 @@
 				this.casas[i] = new Array(this.qtdQuadrados);
 				
 			for (var i = 0; i < this.casas.length; i++)	
-				for (var j = 0; j < this.casas[i].length; j++)
-					this.casas[i][j] = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);	
+				for (var j = 0; j < this.casas[i].length; j++){
+					this.casas[i][j] = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);
+					console.log(this.casas[i][j].toHTML());	
+					}
 		}
 		
 		Tabuleiro.prototype.toString = function(){
@@ -71,9 +101,10 @@
 					buff += i + ", " + j + ", " + this.casas[i][j].toString() + "\n";
 			return buff;
 		}
+
 		
 		var t = new Tabuleiro();
-		console.log(t.toString());
+		//console.log(t.toString());
 	};
 </script>
 </head>
@@ -81,31 +112,31 @@
 <body>
 	
 	<div id="container" style="width:600px; height: 600px; background-color: #DDD";>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
-		<div id="ex">?</div>
+		<div id="ex1">?</div>
+		<div id="ex2">?</div>
+		<div id="ex3">?</div>
+		<div id="ex4">?</div>
+		<div id="ex5">?</div>
+		<div id="ex6">?</div>
+		<div id="ex7">?</div>
+		<div id="ex8">?</div>
+		<div id="ex9">?</div>
+		<div id="ex10">?</div>
+		<div id="ex11">?</div>
+		<div id="ex12">?</div>
+		<div id="ex13">?</div>
+		<div id="ex14">?</div>
+		<div id="ex15">?</div>
+		<div id="ex16">?</div>
+		<div id="ex17">?</div>
+		<div id="ex18">?</div>
+		<div id="ex19">?</div>
+		<div id="ex20">?</div>
+		<div id="ex21">?</div>
+		<div id="ex22">?</div>
+		<div id="ex23">?</div>
+		<div id="ex24">?</div>
+		<div id="ex25">?</div>
 	</div>
 			
 	<pre id="loading">
