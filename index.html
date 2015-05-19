@@ -62,6 +62,7 @@
 		function Casa(tipo, dimensao){				
 			this.tipo = tipo;
 			this.dimensao = dimensao;	
+			this.div = this.toHTML();
 		}
 		
 		Casa.prototype.toString = function(){
@@ -76,24 +77,47 @@
 			return div;
 		}
 		
-		function Tabuleiro(dimensao){
+		function Tabuleiro(id, dimensao){
 			this.qtdQuadrados = 8;
 			this.dimensaoMinima = 100;
-			this.dimensao = (dimensao === undefined) ? 600 : dimensao;			
+			this.dimensao = dimensao;
+			this.id = id;
+			this.div = document.getElementById(this.id);
+			with (this.div.style){
+				height = width = dimensao+"px";
+			}			
 			//dimensao sempre ser multiplo de 8
 			// nao deixar ser menor que dimensao minima
 			this.casas = new Array(this.qtdQuadrados);
 			
 			for (var i = 0; i < this.qtdQuadrados; i++)	
 				this.casas[i] = new Array(this.qtdQuadrados);
+			
+			var casa, iLimite = this.qtdQuadrados - 1;
 				
 			for (var i = 0; i < this.casas.length; i++)	
 				for (var j = 0; j < this.casas[i].length; j++){
-					this.casas[i][j] = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);
-					console.log(this.casas[i][j].toHTML());	
-					}
+					casa = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);
+					casa.div.id = "c"+i+""+j;
 					
-			this.init();
+					casa.div.innerHTML = casa.div.id; /*debug*/
+				
+					if (i == 0 && j == 0)
+						$(casa.div).addClass("casa-top-left");
+					if (i == 0 && j == iLimite)
+						$(casa.div).addClass("casa-top-right");
+					if (i == iLimite && j == 0)
+						$(casa.div).addClass("casa-bottom-left");
+					if (i == iLimite && j == iLimite)
+						$(casa.div).addClass("casa-bottom-right");
+						
+					this.casas[i][j] = casa;
+											
+					this.div.appendChild(casa.div);
+					
+					console.log(this.casas[i][j].toHTML());	
+				}
+					
 		}
 		
 		Tabuleiro.prototype.toString = function(){
@@ -104,38 +128,13 @@
 			return buff;
 		}
 		
-		// + id, style corner, append to container
-		Tabuleiro.prototype.init = function(){
-			var container = document.getElementById("container");
-			var casa, iLimite = this.qtdQuadrados - 1;
-			
-			for (var i = 0; i < this.casas.length; i++)	
-				for (var j = 0; j < this.casas[i].length; j++){
-					casa = this.casas[i][j].toHTML();
-					casa.id = "c"+i+""+j;
-					casa.innerHTML = casa.id; /*debug*/
-					
-					if (i == 0 && j == 0)
-						$(casa).addClass("casa-top-left");
-					if (i == 0 && j == iLimite)
-						$(casa).addClass("casa-top-right");
-					if (i == iLimite && j == 0)
-						$(casa).addClass("casa-bottom-left");
-					if (i == iLimite && j == iLimite)
-						$(casa).addClass("casa-bottom-right");
-												
-					container.appendChild(casa);
-				}
-				
-		}
-		
 		// passar id do container e tamanho como parametro
 		// add funcao para resize
 		// id da casa = id do container + casaij
 
 		// border radius calculado em relacao ao tabuleiro
 		
-		var t = new Tabuleiro();
+		var t = new Tabuleiro("container", 600);
 		//console.log(t.toString());
 	};
 </script>
@@ -143,7 +142,7 @@
 
 <body>
 	
-	<div id="container" style="width:600px; height: 600px;">
+	<div id="container">
 	</div>
 			
 	<pre id="loading">
