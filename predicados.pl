@@ -69,4 +69,18 @@ jogador(1).
 jogador(2).
 
 
+% Tabuleiro: uma lista de triplas
+% Jogada: lista [x,y] onde 0<=x,y<=7
+% Jogador: 1,2
+% JogadasPossiveis: lista de pares com jogadas possiveis
+% ver se que é melhor que o jogador fique junto das jogadasPossiveis, no formato [x,y,Jogador]
+possivel(Tabuleiro, Jogada, Jogador, JogadasPossiveis) :- ???
+
+eliminarJogadasIdenticas(Tabuleiro, Jogador, JogadasPossiveis, JogadasPossiveisSemRepeticao) :- ???
+
+jogar(Tabuleiro, Jogada, Jogador, TabuleiroNovo) :- ???
+
+fim(Tabuleiro, Jogada, Jogador) :- ???
+
+% definir funcoes f,g e h para o jogo
 
