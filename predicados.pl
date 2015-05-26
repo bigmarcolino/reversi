@@ -74,6 +74,7 @@ jogador(2).
 % Jogador: 1,2
 % JogadasPossiveis: lista de pares com jogadas possiveis
 % ver se que é melhor que o jogador fique junto das jogadasPossiveis, no formato [x,y,Jogador]
+/*
 possivel(Tabuleiro, Jogada, Jogador, JogadasPossiveis) :- ???
 
 eliminarJogadasIdenticas(Tabuleiro, Jogador, JogadasPossiveis, JogadasPossiveisSemRepeticao) :- ???
@@ -81,6 +82,17 @@ eliminarJogadasIdenticas(Tabuleiro, Jogador, JogadasPossiveis, JogadasPossiveisS
 jogar(Tabuleiro, Jogada, Jogador, TabuleiroNovo) :- ???
 
 fim(Tabuleiro, Jogada, Jogador) :- ???
+*/
+
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 =:= X2, Y1 = Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 + 1 =:= X2, Y1 + 1 =:= Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 + 1 =:= X2, Y1 =:= Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 =:= X2, Y1 + 1 =:= Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 - 1 =:= X2, Y1 =:= Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 - 1 =:= X2, Y1 - 1 =:= Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 =:= X2, Y1 - 1 =:= Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 + 1 =:= X2, Y1 - 1 =:= Y2.
+vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 - 1 =:= X2, Y1 + 1 =:= Y2.
 
 % definir funcoes f,g e h para o jogo
 
