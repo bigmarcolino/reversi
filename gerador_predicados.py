@@ -22,6 +22,6 @@ print l'''
 out = ""
 for i in range(8):
 	for j in range(8):
-		out += "jogada("+str(i)+", "+str(j)+").\n"
+		out += "jogada("+str(i)+", "+str(j)+", 0).\n"
 		
 print out
