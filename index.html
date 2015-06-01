@@ -249,6 +249,19 @@
 			return casasDoCaminho;
 		}
 		
+		Tabuleiro.prototype.caminhoHomogeneo = function (caminho, jogador){
+			var resposta = true;
+			
+			if (caminho.length == 0) return false;
+					
+			for (var i = 0; i < caminho.length; i++){
+				if (caminho[i].tipo != jogador)
+					return false;	
+			}
+			
+			return resposta;
+		}
+		
 		// retorna a lista de casas possiveis para um jogador
 		Tabuleiro.prototype.jogadasPossiveis = function(jogador){
 			// se existe caminho soh de brancos entre casas jogador A e vizinhos vazios jogador B
