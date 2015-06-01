@@ -156,14 +156,22 @@
 			for (var i = 0; i < this.casas.length; i++)	
 				for (var j = 0; j < this.casas[i].length; j++){
 					if (this.casas[i][j].tipo == jogador){
-					
+						if (this.posicaoValida(i-1, j-1)) vizinhos.add(this.casas[i-1][j-1]);
+						if (this.posicaoValida(i-1, j)) vizinhos.add(this.casas[i-1][j]);
+						if (this.posicaoValida(i+1, j+1)) vizinhos.add(this.casas[i+1][j+1]);
+						if (this.posicaoValida(i+1, j)) vizinhos.add(this.casas[i+1][j]);
+						if (this.posicaoValida(i, j-1)) vizinhos.add(this.casas[i][j-1]);
+						if (this.posicaoValida(i-1, j+1)) vizinhos.add(this.casas[i-1][j+1]);
+						if (this.posicaoValida(i+1, j-1)) vizinhos.add(this.casas[i+1][j-1]);
+						if (this.posicaoValida(i, j+1)) vizinhos.add(this.casas[i][j+1]);
 					}
 				}
+			return vizinhos.values();
 		}
 		
 		Tabuleiro.prototype.posicaoValida = function (i, j){
 			var lim = this.qtdQuadrados - 1;
-			if ( (i >= 0 && i <= lim) && (j >= 0 && j <= lim))
+			if ( (i >= 0 && i <= lim) && (j >= 0 && j <= lim) && this.casas[i][j].ehVazio())
 				return true;
 			return false;
 		}
@@ -175,6 +183,13 @@
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
 		t.casas[4][3].tipo = Tipo.JOGADOR2;
+		/*t.casas[4][3].tipo = Tipo.JOGADOR2;
+		t.casas[4][4].tipo = Tipo.JOGADOR2;
+		t.casas[4][5].tipo = Tipo.JOGADOR2;
+		
+		t.casas[3][3].tipo = Tipo.JOGADOR1;
+		t.casas[3][4].tipo = Tipo.JOGADOR1;
+		t.casas[3][5].tipo = Tipo.JOGADOR1;*/	
 		t.refresh();
 		
 		for (var i = 0; i < t.casas.length; i++)	
@@ -208,6 +223,8 @@
 				vez = Tipo.JOGADOR1;
 			$("#vez").text("Jogador " + vez);
 		}
+		
+		console.log(t.vizinhosVazios(1));
 		
 		//console.log(t.toString());
 	};
