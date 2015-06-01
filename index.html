@@ -147,22 +147,38 @@
 
 		}
 		
-		Tabuleiro.prototype.existeCaminho = function(casaA, casaB){
-			//casaA = casaB
-			if (casaA.x == casaB.x && casaA.y == casaB.y) return false;
+		Tabuleiro.prototype.ehIgual = function (casaA, casaB) {
+			return casaA.x == casaB.x && casaA.y == casaB.y;
+		}
 		
-			// mesma linha
+		Tabuleiro.prototype.mesmaLinha = function(casaA, casaB){
+			if (this.ehIgual(casaA,casaB)) return false;
 			if (casaA.x == casaB.x) return true;
-			
-			//mesma coluna
-			if (casaA.y == casaB.y) return true;
-			
-			//mesma diagonal
-			if ( (casaA.x + casaA.y == casaB.x + casaB.y) || 
-				 (Math.abs(casaA.x - casaA.y) == Math.abs(casaB.x - casaB.y))
-			   ) return true;
-			   
 			return false;
+		} 
+		
+		Tabuleiro.prototype.mesmaColuna = function(casaA, casaB){
+			if (this.ehIgual(casaA,casaB)) return false;
+			if (casaA.y == casaB.y) return true;
+			return false;		
+		}
+		
+		Tabuleiro.prototype.mesmaDiagonalPrimaria = function(casaA, casaB){
+			if (this.ehIgual(casaA,casaB)) return false;
+			if (casaA.x + casaA.y == casaB.x + casaB.y) return true;
+			return false;		
+		}
+		
+		Tabuleiro.prototype.mesmaDiagonalSecundaria = function(casaA, casaB){
+			if (this.ehIgual(casaA,casaB)) return false;
+			if (Math.abs(casaA.x - casaA.y) == Math.abs(casaB.x - casaB.y)) return true;
+			return false;		
+		}
+		
+		Tabuleiro.prototype.existeCaminho = function(casaA, casaB){
+			return this.mesmaLinha(casaA, casaB) || this.mesmaColuna(casaA, casaB) ||
+				this.mesmaDiagonalPrimaria(casaA, casaB) || this.mesmaDiagonalSecundaria(casaA, casaB);
+				
 		}
 		
 		// retorna a lista de casas possiveis para um jogador
@@ -250,6 +266,7 @@
 		/*
 		console.log(t.existeCaminho(t.casas[4][3],t.casas[2][2]));
 		console.log(t.existeCaminho(t.casas[2][2],t.casas[4][3]));
+		console.log(t.existeCaminho(t.casas[2][2],t.casas[2][2]));
 		
 		console.log(t.existeCaminho(t.casas[3][4],t.casas[6][4]));
 		
@@ -258,7 +275,7 @@
 		console.log(t.existeCaminho(t.casas[7][7],t.casas[1][1]));
 		
 		console.log(t.existeCaminho(t.casas[5][3],t.casas[2][6]));
-		*/	
+		*/
 		
 		//console.log(t.toString());
 	};
