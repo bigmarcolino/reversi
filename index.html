@@ -55,6 +55,7 @@
 			this.tipo = tipo;
 			this.dimensao = dimensao;	
 			this.div = this.toHTML();
+			this.x = this.y = 0;
 		}
 		
 		Casa.prototype.toString = function(){
@@ -100,8 +101,10 @@
 				for (var j = 0; j < this.casas[i].length; j++){
 					casa = new Casa(Tipo.VAZIO, this.dimensao / this.qtdQuadrados);
 					
-					casa.div.id = this.id+i+""+j;	
-									
+					casa.div.id = this.id+i+""+j;
+					casa.x = i;	
+					casa.y = j;		
+					
 					//casa.div.innerHTML = casa.div.id; /*debug*/
 				
 					if (i == 0 && j == 0)
@@ -144,9 +147,27 @@
 
 		}
 		
+		Tabuleiro.prototype.existeCaminho = function(casaA, casaB){
+			//casaA = casaB
+			if (casaA.x == casaB.x && casaA.y == casaB.y) return false;
+		
+			// mesma linha
+			if (casaA.x == casaB.x) return true;
+			
+			//mesma coluna
+			if (casaA.y == casaB.y) return true;
+			
+			//mesma diagonal
+			if ( (casaA.x + casaA.y == casaB.x + casaB.y) || 
+				 (Math.abs(casaA.x - casaA.y) == Math.abs(casaB.x - casaB.y))
+			   ) return true;
+			   
+			return false;
+		}
+		
 		// retorna a lista de casas possiveis para um jogador
 		Tabuleiro.prototype.jogadasPossiveis = function(jogador){
-			
+			// se existe caminho soh de brancos entre casas jogador A e vizinhos vazios jogador B
 		}
 		
 		// se jogador = 1, retorna todos os vizinhos das casas preechidas pelo
@@ -224,7 +245,20 @@
 			$("#vez").text("Jogador " + vez);
 		}
 		
-		console.log(t.vizinhosVazios(1));
+		//console.log(t.vizinhosVazios(1));
+		
+		/*
+		console.log(t.existeCaminho(t.casas[4][3],t.casas[2][2]));
+		console.log(t.existeCaminho(t.casas[2][2],t.casas[4][3]));
+		
+		console.log(t.existeCaminho(t.casas[3][4],t.casas[6][4]));
+		
+		console.log(t.existeCaminho(t.casas[3][7],t.casas[3][1]));
+		
+		console.log(t.existeCaminho(t.casas[7][7],t.casas[1][1]));
+		
+		console.log(t.existeCaminho(t.casas[5][3],t.casas[2][6]));
+		*/	
 		
 		//console.log(t.toString());
 	};
