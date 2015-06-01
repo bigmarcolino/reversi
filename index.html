@@ -163,13 +163,13 @@
 			return false;		
 		}
 		
-		Tabuleiro.prototype.mesmaDiagonalPrimaria = function(casaA, casaB){
+		Tabuleiro.prototype.mesmaDiagonalSecundaria = function(casaA, casaB){
 			if (this.ehIgual(casaA,casaB)) return false;
 			if (casaA.x + casaA.y == casaB.x + casaB.y) return true;
 			return false;		
 		}
 		
-		Tabuleiro.prototype.mesmaDiagonalSecundaria = function(casaA, casaB){
+		Tabuleiro.prototype.mesmaDiagonalPrimaria = function(casaA, casaB){
 			if (this.ehIgual(casaA,casaB)) return false;
 			if (Math.abs(casaA.x - casaA.y) == Math.abs(casaB.x - casaB.y)) return true;
 			return false;		
@@ -217,7 +217,20 @@
 				}
 			}
 			else if (this.mesmaDiagonalPrimaria(casaA, casaB)){
-			
+				i0 = casaA.x;
+				i1 = casaB.x;
+				j0 = casaA.x
+				j1 = casaB.y;
+				
+				if (i1 > i0) di = 1;
+				else di = -1;
+				
+				i0 += di;
+				
+				while (i0 != i1){
+					casasDoCaminho.push(this.casas[i0][j0]);
+					i0 += di;
+				}			
 			}
 			else if (this.mesmaDiagonalSecundaria(casaA, casaB)){
 			
