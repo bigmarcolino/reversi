@@ -148,13 +148,20 @@
 		// se jogador = 1, retorna todos os vizinhos das casas preechidas pelo
 		// jogador 1 que estão vazios
 		Tabuleiro.prototype.vizinhosVazios = function (jogador){
-			vizinhos = new Array();
-			/*for (var i = 0; i < this.casas.length; i++)	
+			var vizinhos = new HashSet();
+			for (var i = 0; i < this.casas.length; i++)	
 				for (var j = 0; j < this.casas[i].length; j++){
-					with (this.casas[i][j]){
-						if (tipo == jogador)
+					if (this.casas[i][j].tipo == jogador){
+					
 					}
-				}*/
+				}
+		}
+		
+		Tabuleiro.prototype.posicaoValida = function (i, j){
+			var lim = this.qtdQuadrados - 1;
+			if ( (i >= 0 && i <= lim) && (j >= 0 && j <= lim))
+				return true;
+			return false;
 		}
 		
 		trocarVez();
