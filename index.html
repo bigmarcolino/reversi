@@ -181,6 +181,39 @@
 				
 		}
 		
+		Tabuleiro.prototype.caminho = function (casaA, casaB){
+			var casasDoCaminho = new Array();
+			var i0, j0, i1, j1, di, dj;
+			
+			if (this.mesmaLinha(casaA, casaB)){
+				i0 = i1 = casaA.x;
+				j0 = casaA.y;
+				j1 = casaB.y;
+				
+				if (j1 > j0) dj = 1;
+				else dj = -1;
+				
+				j0 += dj;
+				
+				while (j0 != j1){
+					casasDoCaminho.push(this.casas[i0][j0]);
+					j0 += dj;
+				}
+				
+			} 
+			else if (this.mesmaColuna(casaA, casaB)){
+			
+			}
+			else if (this.mesmaDiagonalPrimaria(casaA, casaB)){
+			
+			}
+			else if (this.mesmaDiagonalSecundaria(casaA, casaB)){
+			
+			}				
+			
+			return casasDoCaminho;
+		}
+		
 		// retorna a lista de casas possiveis para um jogador
 		Tabuleiro.prototype.jogadasPossiveis = function(jogador){
 			// se existe caminho soh de brancos entre casas jogador A e vizinhos vazios jogador B
@@ -276,6 +309,10 @@
 		
 		console.log(t.existeCaminho(t.casas[5][3],t.casas[2][6]));
 		*/
+		
+		console.log(t.caminho(t.casas[3][1], t.casas[3][6]));
+		console.log(t.caminho(t.casas[3][6], t.casas[3][1]));
+		console.log(t.caminho(t.casas[3][3], t.casas[3][4]));
 		
 		//console.log(t.toString());
 	};
