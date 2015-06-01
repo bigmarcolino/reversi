@@ -216,25 +216,35 @@
 					i0 += di;
 				}
 			}
-			else if (this.mesmaDiagonalPrimaria(casaA, casaB)){
+			else if (this.mesmaDiagonalPrimaria(casaA, casaB) || this.mesmaDiagonalSecundaria(casaA, casaB)){
 				i0 = casaA.x;
 				i1 = casaB.x;
-				j0 = casaA.x
+				j0 = casaA.y;
 				j1 = casaB.y;
 				
-				if (i1 > i0) di = 1;
-				else di = -1;
-				
+				if (i1 > i0 && j1 > j0) 
+					di = dj = 1;
+				else if (i1 < i0 && j1 < j0)
+					di = dj = -1;					
+				else if (i1 > i0 && j1 < j0) {
+					di = 1;
+					dj = -1;
+				}
+				else if (i1 < i0 && j1 > j0) {
+					di = -1;
+					dj = 1;
+				}
+									
 				i0 += di;
+				j0 += dj;
 				
-				while (i0 != i1){
+				while (true){
+					if (i0 == i1 && j0 == j1) break;
 					casasDoCaminho.push(this.casas[i0][j0]);
 					i0 += di;
+					j0 += dj;					
 				}			
 			}
-			else if (this.mesmaDiagonalSecundaria(casaA, casaB)){
-			
-			}				
 			
 			return casasDoCaminho;
 		}
@@ -335,10 +345,11 @@
 		console.log(t.existeCaminho(t.casas[5][3],t.casas[2][6]));
 		*/
 		
-		console.log(t.caminho(t.casas[2][2], t.casas[6][2]));
-		console.log(t.caminho(t.casas[6][2], t.casas[2][2]));
-		console.log(t.caminho(t.casas[2][2], t.casas[3][2]));
-		console.log(t.caminho(t.casas[3][3], t.casas[3][3]));
+		
+		console.log(t.caminho(t.casas[0][0], t.casas[7][7]));
+		console.log(t.caminho(t.casas[7][7], t.casas[0][0]));
+		console.log(t.caminho(t.casas[0][7], t.casas[1][6]));
+		console.log(t.caminho(t.casas[0][7], t.casas[0][7]));
 		
 		//console.log(t.toString());
 	};
