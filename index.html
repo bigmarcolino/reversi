@@ -202,7 +202,19 @@
 				
 			} 
 			else if (this.mesmaColuna(casaA, casaB)){
-			
+				i0 = casaA.x;
+				i1 = casaB.x;
+				j0 = j1 = casaA.y;
+				
+				if (i1 > i0) di = 1;
+				else di = -1;
+				
+				i0 += di;
+				
+				while (i0 != i1){
+					casasDoCaminho.push(this.casas[i0][j0]);
+					i0 += di;
+				}
 			}
 			else if (this.mesmaDiagonalPrimaria(casaA, casaB)){
 			
@@ -310,9 +322,10 @@
 		console.log(t.existeCaminho(t.casas[5][3],t.casas[2][6]));
 		*/
 		
-		console.log(t.caminho(t.casas[3][1], t.casas[3][6]));
-		console.log(t.caminho(t.casas[3][6], t.casas[3][1]));
-		console.log(t.caminho(t.casas[3][3], t.casas[3][4]));
+		console.log(t.caminho(t.casas[2][2], t.casas[6][2]));
+		console.log(t.caminho(t.casas[6][2], t.casas[2][2]));
+		console.log(t.caminho(t.casas[2][2], t.casas[3][2]));
+		console.log(t.caminho(t.casas[3][3], t.casas[3][3]));
 		
 		//console.log(t.toString());
 	};
