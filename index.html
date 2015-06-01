@@ -171,7 +171,7 @@
 		
 		Tabuleiro.prototype.mesmaDiagonalPrimaria = function(casaA, casaB){
 			if (this.ehIgual(casaA,casaB)) return false;
-			if (Math.abs(casaA.x - casaA.y) == Math.abs(casaB.x - casaB.y)) return true;
+			if (Math.abs(casaA.x - casaB.x) == Math.abs(casaA.y - casaB.y)) return true;
 			return false;		
 		}
 		
@@ -234,7 +234,7 @@
 					di = -1;
 					dj = 1;
 				}
-									
+				
 				i0 += di;
 				j0 += dj;
 				
@@ -262,9 +262,35 @@
 			return resposta;
 		}
 		
+		Tabuleiro.prototype.selecionaCasasDoTipo = function (tipo){
+			var casas = new Array();
+			for (var i = 0; i < this.casas.length; i++)	
+				for (var j = 0; j < this.casas[i].length; j++)
+					if (this.casas[i][j].tipo == tipo)
+						casas.push(this.casas[i][j]);
+			return casas;
+		}
+		
 		// retorna a lista de casas possiveis para um jogador
 		Tabuleiro.prototype.jogadasPossiveis = function(jogador){
 			// se existe caminho soh de brancos entre casas jogador A e vizinhos vazios jogador B
+			
+			var possiveis = new HashSet();
+			
+			jog = 1;
+			var casasJogadorDaVez = this.selecionaCasasDoTipo(1);			
+			
+			var vizinhosOponente = this.vizinhosVazios(2);
+			var caminho;
+			
+			for (var i = 0; i < casasJogadorDaVez.length; i++)
+				for (var j = 0; j < vizinhosOponente.length; j++){
+					caminho = this.caminho(casasJogadorDaVez[i], vizinhosOponente[j]);
+					if (caminho.length > 0 && this.caminhoHomogeneo(caminho, 2)) 
+						possiveis.add(vizinhosOponente[j]);
+				}
+			
+			return possiveis.values();
 		}
 		
 		// se jogador = 1, retorna todos os vizinhos das casas preechidas pelo
@@ -297,17 +323,18 @@
 		trocarVez();
 
 		var t = new Tabuleiro("container", 580, 8);
-		t.casas[3][3].tipo = Tipo.JOGADOR1;
+		/*t.casas[3][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
-		t.casas[4][3].tipo = Tipo.JOGADOR2;
-		/*t.casas[4][3].tipo = Tipo.JOGADOR2;
-		t.casas[4][4].tipo = Tipo.JOGADOR2;
-		t.casas[4][5].tipo = Tipo.JOGADOR2;
+		t.casas[4][3].tipo = Tipo.JOGADOR2;*/
 		
-		t.casas[3][3].tipo = Tipo.JOGADOR1;
-		t.casas[3][4].tipo = Tipo.JOGADOR1;
-		t.casas[3][5].tipo = Tipo.JOGADOR1;*/	
+		t.casas[4][3].tipo = Tipo.JOGADOR1;
+		t.casas[4][4].tipo = Tipo.JOGADOR1;
+		t.casas[4][5].tipo = Tipo.JOGADOR1;
+		
+		t.casas[3][3].tipo = Tipo.JOGADOR2;
+		t.casas[3][4].tipo = Tipo.JOGADOR2;
+		t.casas[3][5].tipo = Tipo.JOGADOR2;	
 		t.refresh();
 		
 		for (var i = 0; i < t.casas.length; i++)	
@@ -358,12 +385,14 @@
 		console.log(t.existeCaminho(t.casas[5][3],t.casas[2][6]));
 		*/
 		
-		
+		/*
 		console.log(t.caminho(t.casas[0][0], t.casas[7][7]));
 		console.log(t.caminho(t.casas[7][7], t.casas[0][0]));
 		console.log(t.caminho(t.casas[0][7], t.casas[1][6]));
 		console.log(t.caminho(t.casas[0][7], t.casas[0][7]));
+		*/
 		
+		console.log(t.jogadasPossiveis(-1));
 		//console.log(t.toString());
 	};
 	
