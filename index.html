@@ -28,6 +28,8 @@
 </style>
 
 <script src="jquery-2.1.4.js"></script>
+<script src="hashtable.js"></script>
+<script src="hashset.js"></script>
 <script>
 	window.onload = function(){
 		var Tipo = {
@@ -136,6 +138,23 @@
 					this.casas[i][j].refresh();				
 				}
 
+		}
+		
+		// retorna a lista de casas possiveis para um jogador
+		Tabuleiro.prototype.jogadasPossiveis = function(jogador){
+			
+		}
+		
+		// se jogador = 1, retorna todos os vizinhos das casas preechidas pelo
+		// jogador 1 que estão vazios
+		Tabuleiro.prototype.vizinhosVazios = function (jogador){
+			vizinhos = new Array();
+			/*for (var i = 0; i < this.casas.length; i++)	
+				for (var j = 0; j < this.casas[i].length; j++){
+					with (this.casas[i][j]){
+						if (tipo == jogador)
+					}
+				}*/
 		}
 		
 		trocarVez();
