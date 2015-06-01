@@ -74,6 +74,10 @@
 			with (this.div.style) width = height = this.dimensao + "px";
 		}
 		
+		Casa.prototype.ehVazio = function(){
+			return this.tipo == Tipo.VAZIO;
+		}
+		
 		function Tabuleiro(id, dimensao, qtdQuadrados){
 			this.qtdQuadrados = qtdQuadrados;
 			this.dimensao = dimensao;
