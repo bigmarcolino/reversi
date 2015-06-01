@@ -36,7 +36,7 @@
 			JOGADOR2: 2
 		};
 		
-		var vez = Tipo.JOGADOR1;
+		var vez = 0;
 		
 		// ---------------------------------------------------
 		var  v = ["", ".", "..", "..."];
@@ -138,7 +138,7 @@
 
 		}
 		
-		$("#vez").text("Jogador " + vez);
+		trocarVez();
 
 		var t = new Tabuleiro("container", 580, 8);
 		t.casas[3][3].tipo = Tipo.JOGADOR1;
@@ -167,8 +167,17 @@
 		// trocar de vez, atualizar campo, extrair ij da div, aplicar regras do jogo
 		// trocar variavel vez para um objeto do tipo Jogador
 		function selecionarCasa(casa){
+			trocarVez();
 			console.log(casa);
 		}		
+		
+		function trocarVez(){
+			if (vez == Tipo.JOGADOR1)
+				vez = Tipo.JOGADOR2;
+			else
+				vez = Tipo.JOGADOR1;
+			$("#vez").text("Jogador " + vez);
+		}
 		
 		//console.log(t.toString());
 	};
