@@ -92,6 +92,10 @@ vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 =:= X2, Y1 - 1 =:= Y2.
 vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 + 1 =:= X2, Y1 - 1 =:= Y2.
 vizinho([X1|[Y1|_]], [X2|[Y2|_]]) :- X1 - 1 =:= X2, Y1 + 1 =:= Y2.
 
+% ver casos omissos
+caminho1(P1, P2, [P1|[P2]]) :- vizinho(P1, P2).
+caminho1([X1|[Y1|_]], [X2|[Y2|_]], [[X1|Y1]|L]) :- 
+	jogada(X,Y, J), J = 0, vizinho([X|[Y|_]], [X1|[Y1|_])
 
 % definir funcoes f,g e h para o jogo
 
