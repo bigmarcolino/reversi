@@ -370,18 +370,18 @@
 		trocarVez();
 
 		var t = new Tabuleiro("container", 455, 8);
-		/*t.casas[3][3].tipo = Tipo.JOGADOR1;
+		t.casas[3][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
-		t.casas[4][3].tipo = Tipo.JOGADOR2;*/
+		t.casas[4][3].tipo = Tipo.JOGADOR2;
 		
-		t.casas[4][3].tipo = Tipo.JOGADOR1;
+		/*t.casas[4][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[4][5].tipo = Tipo.JOGADOR1;
 		
 		t.casas[3][3].tipo = Tipo.JOGADOR2;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
-		t.casas[3][5].tipo = Tipo.JOGADOR2;	
+		t.casas[3][5].tipo = Tipo.JOGADOR2;	*/
 
 		t.mostrarPossiveis(vez);
 		t.refresh();
@@ -407,12 +407,25 @@
 		// trocar variavel vez para um objeto do tipo Jogador
 		function selecionarCasa(casa){
 			console.log(casa);
-			var i, j;
+			var x, y;
 			var num = casa.id.substring(casa.id.length - 2, casa.id.length);
-			i = parseInt(num.charAt(0));
-			j = parseInt(num.charAt(1));
-			console.log(t.todosCaminhos(t.casas[i][j], vez));
+			x = parseInt(num.charAt(0));
+			y = parseInt(num.charAt(1));
+			
+			t.casas[x][y].tipo = vez;		
+			
+			var caminhos = t.todosCaminhos(t.casas[x][y], vez);
+			
+			for (var i = 0; i < caminhos.length; i++)
+				for (var j = 0; j < caminhos[i].length; j++){
+					x = caminhos[i][j].x;
+					y = caminhos[i][j].y;
+					t.casas[x][y].tipo = vez;
+				}
+					
+			t.refresh();
 			trocarVez();
+			t.mostrarPossiveis(vez);
 		}		
 		
 		function trocarVez(){
