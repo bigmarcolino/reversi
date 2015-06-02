@@ -401,7 +401,7 @@
 				});	
 			}
 
-		$(window).bind('mousewheel', function(event) {
+		$("#container").bind('mousewheel', function(event) {
 			if (event.originalEvent.wheelDelta >= 0) {
 				t.dimensao += 5;
 			}
@@ -411,7 +411,6 @@
 			t.refresh();
 		});
 
-		//TODO adicionar verificacao para quando nao haver jogadas possíveis
 		function selecionarDiv(div){
 			console.log(div);
 			var x, y;
@@ -449,8 +448,6 @@
 			}
 		}		
 		
-		//TODO sem jogadas possiveis para o jogador A -> passar para o jogador B
-		// sem jogadas possiveis para o jogador B -> fim do jogo
 		function trocarVez(){
 			if (vez == Tipo.JOGADOR1)
 				vez = Tipo.JOGADOR2;
