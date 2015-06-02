@@ -12,6 +12,8 @@ function Jogador (){
 
 Jogador.prototype.passarVez = function (){
 	$("#vez").text("Jogador " + this.oponente.id);
+	$("#vez").removeClass();
+	$("#vez").addClass("jogador" + this.oponente.id);
 	return this.oponente;
 }
 

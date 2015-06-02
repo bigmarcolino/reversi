@@ -3,7 +3,7 @@ var Tipo = {
 	JOGADOR1: 1,
 	JOGADOR2: 2
 };
-		
+
 function Casa(tipo, dimensao){				
 	this.tipo = tipo;
 	this.dimensao = dimensao;	
@@ -18,13 +18,23 @@ Casa.prototype.toString = function(){
 Casa.prototype.toHTML = function(){
 	var div = document.createElement("div");
 	$(div).addClass("casa");
-	div.innerHTML = this.tipo;
+	for (var i = 0; i<=2; i++){
+		var classe = "casa"+i;
+		$(div).removeClass(classe);
+	}
+	$(div).addClass("casa"+this.tipo);
+	//div.innerHTML = this.tipo;
 	with (div.style) width = height = this.dimensao + "px";
 	return div;
 }
 
 Casa.prototype.refresh = function(){
-	this.div.innerHTML = this.tipo;
+	//this.div.innerHTML = this.tipo;
+	for (var i = 0; i<=2; i++){
+		var classe = "casa"+i;
+		$(this.div).removeClass(classe);
+	}
+	$(this.div).addClass("casa"+this.tipo);	
 	with (this.div.style) width = height = this.dimensao + "px";
 }
 
