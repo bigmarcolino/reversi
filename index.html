@@ -352,7 +352,6 @@
 				
 		}
 		
-		// fazer uma função para desmarcar
 		Tabuleiro.prototype.mostrarPossiveis = function (vez){
 			for (var i = 0; i < this.possiveisUltimaJogada.length; i++) {
 				$(this.possiveisUltimaJogada[i].div).removeClass("possivel");
@@ -370,10 +369,10 @@
 		trocarVez();
 
 		var t = new Tabuleiro("container", 455, 8);
-		t.casas[3][3].tipo = Tipo.JOGADOR1;
-		t.casas[4][4].tipo = Tipo.JOGADOR1;
-		t.casas[3][4].tipo = Tipo.JOGADOR2;
-		t.casas[4][3].tipo = Tipo.JOGADOR2;
+		t.casas[3][3].tipo = Tipo.JOGADOR2;
+		t.casas[4][4].tipo = Tipo.JOGADOR2;
+		t.casas[3][4].tipo = Tipo.JOGADOR1;
+		t.casas[4][3].tipo = Tipo.JOGADOR1;
 		
 		/*t.casas[4][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
@@ -389,7 +388,7 @@
 		for (var i = 0; i < t.casas.length; i++)	
 			for (var j = 0; j < t.casas[i].length; j++){
 				t.casas[i][j].div.addEventListener("click", function(event){
-					selecionarCasa(event.target);
+					selecionarDiv(event.target);
 				});	
 			}
 
@@ -403,18 +402,21 @@
 			t.refresh();
 		});
 
-		// trocar de vez, atualizar campo, extrair ij da div, aplicar regras do jogo
-		// trocar variavel vez para um objeto do tipo Jogador
-		function selecionarCasa(casa){
-			console.log(casa);
+		//TODO adicionar verificacao para quando nao haver jogadas possíveis
+		function selecionarDiv(div){
+			console.log(div);
 			var x, y;
-			var num = casa.id.substring(casa.id.length - 2, casa.id.length);
+			var num = div.id.substring(div.id.length - 2, div.id.length);
 			x = parseInt(num.charAt(0));
 			y = parseInt(num.charAt(1));
 			
-			t.casas[x][y].tipo = vez;		
+			selecionarCasa(t.casas[x][y]);
+		}
+		
+		function selecionarCasa(casa){
+			casa.tipo = vez;		
 			
-			var caminhos = t.todosCaminhos(t.casas[x][y], vez);
+			var caminhos = t.todosCaminhos(casa, vez);
 			
 			for (var i = 0; i < caminhos.length; i++)
 				for (var j = 0; j < caminhos[i].length; j++){
@@ -428,6 +430,7 @@
 			t.mostrarPossiveis(vez);
 		}		
 		
+		//TODO soh deve trocar
 		function trocarVez(){
 			if (vez == Tipo.JOGADOR1)
 				vez = Tipo.JOGADOR2;
