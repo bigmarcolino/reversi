@@ -368,6 +368,11 @@
 		Tabuleiro.prototype.jogadaValida = function (casa) {
 			return this.possiveisUltimaJogada.indexOf(casa) >= 0;
 		}
+		
+		Tabuleiro.prototype.fimDoJogo = function (){
+			return this.jogadasPossiveis(Tipo.JOGADOR1).length == 0 && 
+					this.jogadasPossiveis(Tipo.JOGADOR2).length == 0;
+		}
 				
 		
 		trocarVez();
@@ -434,9 +439,18 @@
 			t.refresh();
 			trocarVez();
 			t.mostrarPossiveis(vez);
+			while (t.possiveisUltimaJogada.length == 0){
+				if (t.fimDoJogo()) {
+					window.alert("Fim do Jogo");	
+					break;
+				}
+				trocarVez();
+				t.mostrarPossiveis(vez);
+			}
 		}		
 		
-		//TODO soh deve trocar
+		//TODO sem jogadas possiveis para o jogador A -> passar para o jogador B
+		// sem jogadas possiveis para o jogador B -> fim do jogo
 		function trocarVez(){
 			if (vez == Tipo.JOGADOR1)
 				vez = Tipo.JOGADOR2;
