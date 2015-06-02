@@ -364,6 +364,10 @@
 				$(this.possiveisUltimaJogada[i].div).addClass("possivel");				
 			}
 		}
+		
+		Tabuleiro.prototype.jogadaValida = function (casa) {
+			return this.possiveisUltimaJogada.indexOf(casa) >= 0;
+		}
 				
 		
 		trocarVez();
@@ -410,7 +414,9 @@
 			x = parseInt(num.charAt(0));
 			y = parseInt(num.charAt(1));
 			
-			selecionarCasa(t.casas[x][y]);
+			var casa = t.casas[x][y];
+			if (t.jogadaValida(casa))
+				selecionarCasa(casa);
 		}
 		
 		function selecionarCasa(casa){
