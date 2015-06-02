@@ -98,6 +98,7 @@
 			this.id = id;
 			this.div = document.getElementById(this.id);
 			this.raioBorda = dimensao / 24;
+			this.possiveisUltimaJogada = new Array();
 			
 			with (this.div.style){
 				height = width = dimensao+"px";
@@ -334,12 +335,34 @@
 			return false;
 		}
 		
+		// assumindo casaA posição possivel
+		Tabuleiro.prototype.todosCaminhos = function (casaA, jogador){
+			if (jogador == Tipo.JOGADOR1) oponente = Tipo.JOGADOR2;
+			else oponente = Tipo.JOGADOR1;
+			
+			var caminhos = new Array();
+			var casasDoTipo = this.selecionaCasasDoTipo(jogador);
+			for (var i = 0; i < casasDoTipo.length; i++){
+				var caminho = this.caminho(casaA, casasDoTipo[i])
+				if (caminho.length > 0 && this.caminhoHomogeneo(caminho, oponente))
+					caminhos.push(caminho);
+			}
+			
+			return caminhos;
+				
+		}
+		
 		// fazer uma função para desmarcar
 		Tabuleiro.prototype.mostrarPossiveis = function (vez){
-			var possiveis = this.jogadasPossiveis(vez);
-			for (var i = 0; i < possiveis.length; i++) {
-				$(possiveis[i].div).removeClass("casa");
-				$(possiveis[i].div).addClass("possivel");				
+			for (var i = 0; i < this.possiveisUltimaJogada.length; i++) {
+				$(this.possiveisUltimaJogada[i].div).removeClass("possivel");
+				$(this.possiveisUltimaJogada[i].div).addClass("casa");				
+			}
+		
+			this.possiveisUltimaJogada = this.jogadasPossiveis(vez);
+			for (var i = 0; i < this.possiveisUltimaJogada.length; i++) {
+				$(this.possiveisUltimaJogada[i].div).removeClass("casa");
+				$(this.possiveisUltimaJogada[i].div).addClass("possivel");				
 			}
 		}
 				
@@ -383,8 +406,13 @@
 		// trocar de vez, atualizar campo, extrair ij da div, aplicar regras do jogo
 		// trocar variavel vez para um objeto do tipo Jogador
 		function selecionarCasa(casa){
-			trocarVez();
 			console.log(casa);
+			var i, j;
+			var num = casa.id.substring(casa.id.length - 2, casa.id.length);
+			i = parseInt(num.charAt(0));
+			j = parseInt(num.charAt(1));
+			console.log(t.todosCaminhos(t.casas[i][j], vez));
+			trocarVez();
 		}		
 		
 		function trocarVez(){
@@ -418,7 +446,7 @@
 		console.log(t.caminho(t.casas[0][7], t.casas[0][7]));
 		*/
 		
-		console.log(t.jogadasPossiveis(vez));
+		//console.log(t.jogadasPossiveis(vez));
 		//console.log(t.toString());
 	};
 	
