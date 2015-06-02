@@ -276,17 +276,22 @@
 			// se existe caminho soh de brancos entre casas jogador A e vizinhos vazios jogador B
 			
 			var possiveis = new HashSet();
+			if (jogador == Tipo.JOGADOR1){
+				oponente = 2;
+			}
+			else {
+				oponente = 1;
+			}
+				
+			var casasJogadorDaVez = this.selecionaCasasDoTipo(jogador);			
 			
-			jog = 1;
-			var casasJogadorDaVez = this.selecionaCasasDoTipo(1);			
-			
-			var vizinhosOponente = this.vizinhosVazios(2);
+			var vizinhosOponente = this.vizinhosVazios(oponente);
 			var caminho;
 			
 			for (var i = 0; i < casasJogadorDaVez.length; i++)
 				for (var j = 0; j < vizinhosOponente.length; j++){
 					caminho = this.caminho(casasJogadorDaVez[i], vizinhosOponente[j]);
-					if (caminho.length > 0 && this.caminhoHomogeneo(caminho, 2)) 
+					if (caminho.length > 0 && this.caminhoHomogeneo(caminho, oponente)) 
 						possiveis.add(vizinhosOponente[j]);
 				}
 			
@@ -392,7 +397,7 @@
 		console.log(t.caminho(t.casas[0][7], t.casas[0][7]));
 		*/
 		
-		console.log(t.jogadasPossiveis(-1));
+		console.log(t.jogadasPossiveis(vez));
 		//console.log(t.toString());
 	};
 	
