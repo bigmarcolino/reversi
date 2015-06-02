@@ -16,8 +16,21 @@
 		float:left;
 	}
 	
+	.possivel {
+		background-color: #BBB;
+		display: flex;
+		justify-content: center; /* align horizontal */
+		align-items: center;
+		transition: background-color 610ms;
+		float:left;
+	}
+	
 	.casa:hover {
 		background-color: red;
+	}
+	
+	.possivel:hover {	
+		background-color: #4FF58C;
 	}
 	
 	/*.casa-top-left { border-top-left-radius: 25px }
@@ -276,12 +289,8 @@
 			// se existe caminho soh de brancos entre casas jogador A e vizinhos vazios jogador B
 			
 			var possiveis = new HashSet();
-			if (jogador == Tipo.JOGADOR1){
-				oponente = 2;
-			}
-			else {
-				oponente = 1;
-			}
+			if (jogador == Tipo.JOGADOR1) oponente = Tipo.JOGADOR2;
+			else oponente = Tipo.JOGADOR1;
 				
 			var casasJogadorDaVez = this.selecionaCasasDoTipo(jogador);			
 			
@@ -325,9 +334,19 @@
 			return false;
 		}
 		
+		// fazer uma função para desmarcar
+		Tabuleiro.prototype.mostrarPossiveis = function (vez){
+			var possiveis = this.jogadasPossiveis(vez);
+			for (var i = 0; i < possiveis.length; i++) {
+				$(possiveis[i].div).removeClass("casa");
+				$(possiveis[i].div).addClass("possivel");				
+			}
+		}
+				
+		
 		trocarVez();
 
-		var t = new Tabuleiro("container", 580, 8);
+		var t = new Tabuleiro("container", 455, 8);
 		/*t.casas[3][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
@@ -340,6 +359,8 @@
 		t.casas[3][3].tipo = Tipo.JOGADOR2;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
 		t.casas[3][5].tipo = Tipo.JOGADOR2;	
+
+		t.mostrarPossiveis(vez);
 		t.refresh();
 		
 		for (var i = 0; i < t.casas.length; i++)	
