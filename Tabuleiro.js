@@ -3,11 +3,12 @@ function Tabuleiro(id, dimensao, qtdQuadrados){
 	this.dimensao = dimensao;
 	this.id = id;
 	this.div = document.getElementById(this.id);
-	this.raioBorda = dimensao / 24;
+	this.raioBorda = this.dimensao / 24;
 	this.possiveisUltimaJogada = new Array();
+	this.folga = this.qtdQuadrados * 2 + 4;
 	
 	with (this.div.style){
-		height = width = dimensao+"px";
+		height = width = this.dimensao + this.folga +"px";
 	}			
 
 	this.casas = new Array(this.qtdQuadrados);
@@ -27,6 +28,15 @@ function Tabuleiro(id, dimensao, qtdQuadrados){
 			
 			//casa.div.innerHTML = casa.div.id; /*debug*/
 		
+			if (i == 0)
+				casa.div.style.borderTop = "#BBB solid 2px";
+			if (j == 0)
+				casa.div.style.borderLeft = "#BBB solid 2px";
+			if (i == iLimite)
+				casa.div.style.borderBottom = "#BBB solid 2px";
+			if (j == iLimite)
+				casa.div.style.borderRight = "#BBB solid 2px";
+								
 			if (i == 0 && j == 0)
 				casa.div.style.borderTopLeftRadius = this.raioBorda+"px";
 			if (i == 0 && j == iLimite)
@@ -56,7 +66,7 @@ Tabuleiro.prototype.toString = function(){
 // atualizar propriedade do objeto -> atualizar div
 Tabuleiro.prototype.refresh = function(){
 	with (this.div.style){
-		height = width = this.dimensao+"px";
+		height = width = this.dimensao + this.folga +"px";
 	}	
 
 	for (var i = 0; i < this.casas.length; i++)	

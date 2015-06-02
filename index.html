@@ -14,15 +14,17 @@
 		align-items: center;
 		transition: background-color 610ms;
 		float:left;
+		border: #BBB solid 1px;
 	}
 	
 	.possivel {
-		background-color: #BBB;
+		background-color: #CDC;
 		display: flex;
 		justify-content: center; /* align horizontal */
 		align-items: center;
 		transition: background-color 610ms;
 		float:left;
+		border: #BBB solid 1px;
 	}
 	
 	.casa:hover {
@@ -56,13 +58,13 @@
 		var jogadorDaVez = jogadores[1].passarVez();
 		
 		// ---------------------------------------------------
-		var  v = ["", ".", "..", "..."];
+		/*var  v = ["", ".", "..", "..."];
 		var i = 0;
 		setInterval(function () {
 			i %= 4;
 			document.getElementById("loading").innerHTML = v[i];
 			i++ ;
-		}, 500);
+		}, 500);*/
 		// ---------------------------------------------------
 
 		var t = new Tabuleiro("container", 455, 8);
