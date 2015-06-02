@@ -40,7 +40,7 @@ function Tabuleiro(id, dimensao, qtdQuadrados){
 									
 			this.div.appendChild(casa.div);
 			
-			console.log(this.casas[i][j].toHTML());	
+			//console.log(this.casas[i][j].toHTML());	
 		}
 			
 }

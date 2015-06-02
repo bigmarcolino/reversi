@@ -45,9 +45,15 @@
 <script src="hashset.js"></script>
 <script src="Casa.js"></script>
 <script src="Tabuleiro.js"></script>
+<script src="Jogador.js"></script>
 <script>
 	window.onload = function(){
-		var vez = 0;
+		var jogadores = [new Jogador(), new Jogador()];
+		jogadores[0].oponente = jogadores[1];
+		jogadores[1].oponente = jogadores[0];
+		console.log(jogadores);
+	
+		var jogadorDaVez = jogadores[1].passarVez();
 		
 		// ---------------------------------------------------
 		var  v = ["", ".", "..", "..."];
@@ -58,8 +64,6 @@
 			i++ ;
 		}, 500);
 		// ---------------------------------------------------
-
-		trocarVez();
 
 		var t = new Tabuleiro("container", 455, 8);
 		t.casas[3][3].tipo = Tipo.JOGADOR2;
@@ -75,7 +79,7 @@
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
 		t.casas[3][5].tipo = Tipo.JOGADOR2;	*/
 
-		t.mostrarPossiveis(vez);
+		t.mostrarPossiveis(jogadorDaVez.id);
 		t.refresh();
 		
 		for (var i = 0; i < t.casas.length; i++)	
@@ -108,37 +112,37 @@
 		}
 		
 		function selecionarCasa(casa){
-			casa.tipo = vez;		
+			casa.tipo = jogadorDaVez.id;		
 			
-			var caminhos = t.todosCaminhos(casa, vez);
+			var caminhos = t.todosCaminhos(casa, jogadorDaVez.id);
 			
 			for (var i = 0; i < caminhos.length; i++)
 				for (var j = 0; j < caminhos[i].length; j++){
 					x = caminhos[i][j].x;
 					y = caminhos[i][j].y;
-					t.casas[x][y].tipo = vez;
+					t.casas[x][y].tipo = jogadorDaVez.id;
 				}
 					
 			t.refresh();
-			trocarVez();
-			t.mostrarPossiveis(vez);
+			jogadorDaVez = jogadorDaVez.passarVez();
+			t.mostrarPossiveis(jogadorDaVez.id);
 			while (t.possiveisUltimaJogada.length == 0){
 				if (t.fimDoJogo()) {
 					window.alert("Fim do Jogo");	
 					break;
 				}
-				trocarVez();
-				t.mostrarPossiveis(vez);
+				jogadorDaVez = jogadorDaVez.passarVez();
+				t.mostrarPossiveis(jogadorDaVez.id);
 			}
 		}		
-		
-		function trocarVez(){
-			if (vez == Tipo.JOGADOR1)
-				vez = Tipo.JOGADOR2;
+		/*
+		function trocarjogadorDaVez(){
+			if (jogadorDaVez == Tipo.JOGADOR1)
+				jogadorDaVez = Tipo.JOGADOR2;
 			else
-				vez = Tipo.JOGADOR1;
-			$("#vez").text("Jogador " + vez);
-		}
+				jogadorDaVez = Tipo.JOGADOR1;
+			$("#jogadorDaVez").text("Jogador " + jogadorDaVez);
+		}*/
 		
 		//console.log(t.vizinhosVazios(1));
 		
@@ -163,7 +167,7 @@
 		console.log(t.caminho(t.casas[0][7], t.casas[0][7]));
 		*/
 		
-		//console.log(t.jogadasPossiveis(vez));
+		//console.log(t.jogadasPossiveis(jogadorDaVez));
 		//console.log(t.toString());
 	};
 	
