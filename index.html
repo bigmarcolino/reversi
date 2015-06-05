@@ -96,6 +96,10 @@
 					selecionarDiv(event.target);
 				});	
 			}
+			
+		document.forms[0].desfazer.addEventListener("click", function(){
+			desfazerJogada(t, jogadorDaVez);
+		});
 
 		$("#container").bind('mousewheel', function(event) {
 			if (event.originalEvent.wheelDelta >= 0) {
@@ -142,6 +146,11 @@
 				jogadorDaVez = jogadorDaVez.passarVez();
 				t.mostrarPossiveis(jogadorDaVez.id);
 			}
+		}
+		
+		function desfazerJogada(tabuleiro, jogador){
+			console.log(tabuleiro);
+			console.log(jogador);
 		}		
 		/*
 		function trocarjogadorDaVez(){
@@ -190,6 +199,9 @@
 	<div id="container">
 	</div>
 			
+	<form>
+		<input type="button" name="desfazer" value="Desfazer jogada" />
+	</form>		
 	<pre id="loading">
 	</pre>
 	
