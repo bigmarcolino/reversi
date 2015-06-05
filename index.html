@@ -102,7 +102,7 @@
 			}
 			
 		document.forms[0].desfazer.addEventListener("click", function(){
-			desfazerJogada(t, jogadorDaVez);
+			desfazerJogada(t);
 		});
 
 		$("#container").bind('mousewheel', function(event) {
@@ -156,7 +156,7 @@
 			}
 		}
 		
-		function desfazerJogada(tabuleiro, jogador){
+		function desfazerJogada(tabuleiro){
 			if (jogadas.length == 0){
 				window.alert("Não há mais jogadas a serem desfeitas");
 			}
