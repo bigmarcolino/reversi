@@ -289,3 +289,25 @@ Tabuleiro.prototype.fimDoJogo = function (){
 	return this.jogadasPossiveis(Tipo.JOGADOR1).length == 0 && 
 			this.jogadasPossiveis(Tipo.JOGADOR2).length == 0;
 }
+
+Tabuleiro.prototype.obterTriplas = function (){
+	triplas = new Array();
+	for (var i = 0; i < this.casas.length; i++)	
+		for (var j = 0; j < this.casas[i].length; j++)
+			triplas.push(new Array(this.casas[i][j].x, this.casas[i][j].y, this.casas[i][j].tipo));
+	return triplas;
+}
+
+Tabuleiro.prototype.restaurarTriplas = function(triplas){
+	var x,y,tipo;
+	for (var i = 0; i < triplas.length; i++){
+		x = triplas[i][0];
+		y = triplas[i][1];
+		tipo = triplas[i][2];
+		this.casas[x][y].x = x;				
+		this.casas[x][y].y = y;
+		this.casas[x][y].tipo = tipo;
+	}
+	// restaurar jogador certo, this.mostrarPossiveis(jogadorDaVez.id)
+	this.refresh();		
+}
