@@ -16,7 +16,3 @@ Jogador.prototype.passarVez = function (){
 	$("#vez").addClass("jogador" + this.oponente.id);
 	return this.oponente;
 }
-
-Jogador.prototype.jogar = function (casa){
-	
-}

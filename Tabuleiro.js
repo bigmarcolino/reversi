@@ -298,7 +298,7 @@ Tabuleiro.prototype.obterTriplas = function (){
 	return triplas;
 }
 
-Tabuleiro.prototype.restaurarTriplas = function(triplas){
+Tabuleiro.prototype.restaurarTriplas = function(triplas, jogador){
 	var x,y,tipo;
 	for (var i = 0; i < triplas.length; i++){
 		x = triplas[i][0];
@@ -308,6 +308,6 @@ Tabuleiro.prototype.restaurarTriplas = function(triplas){
 		this.casas[x][y].y = y;
 		this.casas[x][y].tipo = tipo;
 	}
-	// restaurar jogador certo, this.mostrarPossiveis(jogadorDaVez.id)
+	this.mostrarPossiveis(jogador.id);
 	this.refresh();		
 }

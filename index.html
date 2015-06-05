@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<meta charset='utf-8'>
 <style>
 	#container{
 		margin: 10px auto 10px auto;
@@ -54,6 +55,7 @@
 <script src="Casa.js"></script>
 <script src="Tabuleiro.js"></script>
 <script src="Jogador.js"></script>
+<script src="Jogada.js"></script>
 <script>
 	window.onload = function(){
 		var jogadores = [new Jogador(), new Jogador()];
@@ -62,6 +64,8 @@
 		console.log(jogadores);
 	
 		var jogadorDaVez = jogadores[1].passarVez();
+		
+		var jogadas = new Array();
 		
 		// ---------------------------------------------------
 		/*var  v = ["", ".", "..", "..."];
@@ -78,7 +82,7 @@
 		t.casas[4][4].tipo = Tipo.JOGADOR2;
 		t.casas[3][4].tipo = Tipo.JOGADOR1;
 		t.casas[4][3].tipo = Tipo.JOGADOR1;
-		
+
 		/*t.casas[4][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[4][5].tipo = Tipo.JOGADOR1;
@@ -124,6 +128,10 @@
 		}
 		
 		function selecionarCasa(casa){
+			//TODO deve ser feita uma cópia de jogadorDaVez em vez de passar o objeto inteiro
+			// por enquanto funcionará, mas quando for necessário restaurar a quantidade de jogadas e pontos
+			// será necessária a cópia
+			jogadas.push(new Jogada(casa, t.obterTriplas(), jogadorDaVez)); 
 			casa.tipo = jogadorDaVez.id;		
 			
 			var caminhos = t.todosCaminhos(casa, jogadorDaVez.id);
@@ -149,8 +157,16 @@
 		}
 		
 		function desfazerJogada(tabuleiro, jogador){
-			console.log(tabuleiro);
-			console.log(jogador);
+			if (jogadas.length == 0){
+				window.alert("Não há mais jogadas a serem desfeitas");
+			}
+			else{
+				var ultimaJogada = jogadas.pop();
+				tabuleiro.restaurarTriplas(ultimaJogada.triplas, ultimaJogada.jogador);
+				jogadorDaVez = ultimaJogada.jogador.oponente.passarVez();
+			}
+			//console.log(tabuleiro);
+			//console.log(jogador);
 		}		
 		/*
 		function trocarjogadorDaVez(){
