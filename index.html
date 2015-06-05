@@ -61,7 +61,7 @@
 		var jogadores = [new Jogador(), new Jogador()];
 		jogadores[0].oponente = jogadores[1];
 		jogadores[1].oponente = jogadores[0];
-		console.log(jogadores);
+		//console.log(jogadores);
 	
 		var jogadorDaVez = jogadores[1].passarVez();
 		
@@ -116,7 +116,7 @@
 		});
 
 		function selecionarDiv(div){
-			console.log(div);
+			//console.log(div);
 			var x, y;
 			var num = div.id.substring(div.id.length - 2, div.id.length);
 			x = parseInt(num.charAt(0));
@@ -217,7 +217,8 @@
 			
 	<form>
 		<input type="button" name="desfazer" value="Desfazer jogada" />
-	</form>		
+	</form>
+			
 	<pre id="loading">
 	</pre>
 	
