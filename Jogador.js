@@ -44,14 +44,3 @@ Jogador.prototype.clonar = function (){
 	return jogador;
 }
 
-Jogador.prototype.jogar = function (tabuleiro){
-	switch (this.tipo) {
-		case Jogador.HUMANO:
-			break;
-		case Jogador.IA1:
-			break;
-		case Jogador.IA2:
-			break;						
-	}
-
-}

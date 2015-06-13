@@ -60,7 +60,7 @@
 	window.onload = function(){
 		var start, end;
 		var jogadores = [new Jogador(), new Jogador()];
-		jogadores[0].tipo = Jogador.IA1;
+		jogadores[0].tipo = Jogador.IA1; //modifique para Jogador.HUMANO para testar as outras possibilidades
 		jogadores[1].tipo = Jogador.IA2;
 		jogadores[0].oponente = jogadores[1];
 		jogadores[1].oponente = jogadores[0];
@@ -143,7 +143,7 @@
 
 			var ia1Jogando = t.jogadorDaVez.tipo == Jogador.IA1 && t.jogadasPossiveis(t.jogadorDaVez.id).length> 0;
 			var ia2Jogando = t.jogadorDaVez.tipo == Jogador.IA2 && t.jogadasPossiveis(t.jogadorDaVez.id).length> 0;
-			//IA nivel 2
+
 			while (ia1Jogando || ia2Jogando){
 				if(t.jogadorDaVez.tipo == Jogador.IA2){
 					start = performance.now();
