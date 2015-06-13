@@ -1,5 +1,9 @@
 Jogador.id = 0;
 
+Jogador.HUMANO = 0;
+Jogador.IA1 = 1;
+Jogador.IA2 = 2;
+
 function Jogador (){
 	Jogador.id ++;
 	this.id = Jogador.id;
@@ -8,6 +12,7 @@ function Jogador (){
 	this.pontos = 2;
 	this.jogadas = 0;
 	this.oponente = null;
+	this.tipo = Jogador.HUMANO;
 }
 
 Jogador.prototype.passarVez = function (){
@@ -23,12 +28,14 @@ Jogador.prototype.clonar = function (){
 	jogador.nome = this.nome;
 	jogador.tempo = this.tempo;
 	jogador.pontos = this.pontos;
+	jogador.tipo = this.tipo;
 	jogador.jogadas = this.jogadas;
 	var oponente = new Jogador;
 	oponente.id = this.id;
 	oponente.nome = this.nome;
 	oponente.tempo = this.tempo;
 	oponente.pontos = this.pontos;
+	oponente.tipo = this.tipo;
 	oponente.jogadas = this.jogadas;
 	jogador.oponente = oponente;
 	oponente.oponente = jogador;
