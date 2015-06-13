@@ -6,6 +6,8 @@ function Tabuleiro(id, dimensao, qtdQuadrados){
 	this.raioBorda = this.dimensao / 24;
 	this.possiveisUltimaJogada = new Array();
 	this.folga = this.qtdQuadrados * 2 + 4;
+	this.jogadas = new Array();
+	this.jogadorDaVez = null;
 	
 	with (this.div.style){
 		height = width = this.dimensao + this.folga +"px";
@@ -268,7 +270,8 @@ Tabuleiro.prototype.todosCaminhos = function (casaA, jogador){
 		
 }
 
-Tabuleiro.prototype.mostrarPossiveis = function (vez){
+Tabuleiro.prototype.mostrarPossiveis = function (){
+	var vez = this.jogadorDaVez.id;
 	for (var i = 0; i < this.possiveisUltimaJogada.length; i++) {
 		$(this.possiveisUltimaJogada[i].div).removeClass("possivel");
 		$(this.possiveisUltimaJogada[i].div).addClass("casa");				
@@ -298,7 +301,7 @@ Tabuleiro.prototype.obterTriplas = function (){
 	return triplas;
 }
 
-Tabuleiro.prototype.restaurarTriplas = function(triplas, jogador){
+Tabuleiro.prototype.restaurarTriplas = function(triplas){
 	var x,y,tipo;
 	for (var i = 0; i < triplas.length; i++){
 		x = triplas[i][0];
@@ -308,31 +311,55 @@ Tabuleiro.prototype.restaurarTriplas = function(triplas, jogador){
 		this.casas[x][y].y = y;
 		this.casas[x][y].tipo = tipo;
 	}
-	this.mostrarPossiveis(jogador.id);
+	this.mostrarPossiveis();
 	this.refresh();		
 }
 
-Tabuleiro.prototype.jogar = function (casa, jogadorDaVez) {
-	this.simularJogada(casa, jogadorDaVez);
+Tabuleiro.prototype.jogar = function (casa) {
+	this.jogadas.push(new Jogada(casa, this.obterTriplas(), this.jogadorDaVez.id));
+
+	this.simularJogada(casa);
 			
 	this.refresh();			
 	
-	proxJogador = jogadorDaVez.passarVez();
+	this.jogadorDaVez = this.jogadorDaVez.passarVez();
 	
-	this.mostrarPossiveis(proxJogador.id);
+	this.mostrarPossiveis();
 	
-	return proxJogador;
+	while (this.jogadasPossiveis(this.jogadorDaVez.id).length == 0){
+		if (this.fimDoJogo()) {
+			//terminarTimer();
+			alert("Fim do Jogo");
+			break;
+		}
+		console.log("O jogador passou a vez, pois nao havia mais jogadas");
+		this.jogadorDaVez = this.jogadorDaVez.passarVez();
+		this.mostrarPossiveis();
+	}
 }
 
-Tabuleiro.prototype.simularJogada = function (casa, jogadorDaVez) {
-	casa.tipo = jogadorDaVez.id;		
+Tabuleiro.prototype.simularJogada = function (casa) {
+	casa.tipo = this.jogadorDaVez.id;		
 	
-	var caminhos = this.todosCaminhos(casa, jogadorDaVez.id);
+	var caminhos = this.todosCaminhos(casa, this.jogadorDaVez.id);
 	
 	for (var i = 0; i < caminhos.length; i++)
 		for (var j = 0; j < caminhos[i].length; j++){
 			x = caminhos[i][j].x;
 			y = caminhos[i][j].y;
-			this.casas[x][y].tipo = jogadorDaVez.id;
+			this.casas[x][y].tipo = this.jogadorDaVez.id;
 		}
+}
+
+Tabuleiro.prototype.desfazerJogada = function(){
+	if (this.jogadas.length == 0){
+		window.alert("Não há mais jogadas a serem desfeitas");
+	}
+	else{
+		var ultimaJogada = this.jogadas.pop();
+		this.restaurarTriplas(ultimaJogada.triplas, ultimaJogada.jogador);
+		this.jogadorDaVez = ultimaJogada.jogador.oponente.passarVez();
+	}
+	//console.log(tabuleiro);
+	//console.log(jogador);
 }
