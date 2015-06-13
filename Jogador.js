@@ -16,3 +16,20 @@ Jogador.prototype.passarVez = function (){
 	$("#vez").addClass("jogador" + this.oponente.id);
 	return this.oponente;
 }
+
+Jogador.prototype.clonar = function (){
+	var jogador = new Jogador();
+	jogador.id = this.id;
+	jogador.nome = this.nome;
+	jogador.tempo = this.tempo;
+	jogador.pontos = this.pontos;
+	jogador.jogadas = this.jogadas;
+	var oponente = new Jogador;
+	oponente.id = this.id;
+	oponente.nome = this.nome;
+	oponente.tempo = this.tempo;
+	oponente.pontos = this.pontos;
+	oponente.jogadas = this.jogadas;
+	jogador.oponente = oponente;
+	oponente.oponente = jogador;
+}
