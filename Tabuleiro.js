@@ -328,7 +328,6 @@ Tabuleiro.prototype.jogar = function (casa) {
 	
 	while (this.jogadasPossiveis(this.jogadorDaVez.id).length == 0){
 		if (this.fimDoJogo()) {
-			//terminarTimer();
 			alert("Fim do Jogo");
 			break;
 		}

@@ -58,7 +58,6 @@
 <script src="Jogada.js"></script>
 <script>
 	window.onload = function(){
-		var timer, a = 0, b = 0;
 		var jogadores = [new Jogador(), new Jogador()];
 		jogadores[1].tipo = Jogador.HUMANO;
 		jogadores[0].tipo = Jogador.IA2;
@@ -116,18 +115,6 @@
 			t.refresh();
 		});
 		
-		function comecarTimer(){
-			timer = setInterval(function(){
-				t.jogadorDaVez.tempo++;
-			}, 1000);
-		}
-
-		function terminarTimer(){
-			console.log("tempo jogador vez " + t.jogadorDaVez.tempo + 
-			", oponente " + t.jogadorDaVez.oponente.tempo);
-			clearInterval(timer);
-		}
-		
 		if (t.jogadorDaVez.tipo != Jogador.HUMANO)
 			IA();	
 		
@@ -147,7 +134,6 @@
 			//TODO deve ser feita uma cópia de jogadorDaVez em vez de passar o objeto inteiro
 			// por enquanto funcionará, mas quando for necessário restaurar a quantidade de jogadas e pontos
 			// será necessária a cópia
-			comecarTimer();
 			t.jogar(casa);
 			IA();
 			//IA nivel 1
