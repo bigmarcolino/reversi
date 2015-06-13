@@ -317,11 +317,11 @@ Tabuleiro.prototype.jogar = function (casa, jogadorDaVez) {
 			
 	this.refresh();			
 	
-	jogadorDaVez = jogadorDaVez.passarVez();
+	proxJogador = jogadorDaVez.passarVez();
 	
-	this.mostrarPossiveis(jogadorDaVez.id);
+	this.mostrarPossiveis(proxJogador.id);
 	
-	return jogadorDaVez;
+	return proxJogador;
 }
 
 Tabuleiro.prototype.simularJogada = function (casa, jogadorDaVez) {

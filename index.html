@@ -118,7 +118,7 @@
 			}
 			t.refresh();
 		});
-
+		
 		function selecionarDiv(div){
 			//console.log(div);
 			var x, y;
@@ -137,23 +137,6 @@
 			// será necessária a cópia
 			jogadas.push(new Jogada(casa, t.obterTriplas(), jogadorDaVez));
 			jogadorDaVez = t.jogar(casa, jogadorDaVez);
-			/* 
-			casa.tipo = jogadorDaVez.id;		
-			
-			var caminhos = t.todosCaminhos(casa, jogadorDaVez.id);
-			
-			for (var i = 0; i < caminhos.length; i++)
-				for (var j = 0; j < caminhos[i].length; j++){
-					x = caminhos[i][j].x;
-					y = caminhos[i][j].y;
-					t.casas[x][y].tipo = jogadorDaVez.id;
-				}
-					
-			t.refresh();			
-			
-			jogadorDaVez = jogadorDaVez.passarVez();
-			t.mostrarPossiveis(jogadorDaVez.id);
-			*/
 			
 			//IA nivel 1
 			/*iaJogando = 1;
@@ -224,9 +207,9 @@
 			}*/
 
 			//IA nivel 2
-			iaJogando = 1;
+			var iaJogando = true;
 
-			for(var w = 0; w < iaJogando; w++){
+			while (iaJogando){
 				if(jogadorDaVez.id == 2){
 					var casasPossiveisJ2 = t.jogadasPossiveis(Tipo.JOGADOR2);
 					var melhorCasaId = 0;
@@ -251,7 +234,8 @@
 				        	else{
 				        		//jogadas.push(new Jogada(casasPossiveisJ2[i], t.obterTriplas(), jogadorDaVez));
 								//casasPossiveisJ2[i].tipo = Tipo.JOGADOR2;
-								casasPossiveisJ2[i].tipo = jogadorDaVez.id;
+								t.simularJogada(casasPossiveisJ2[i], jogadorDaVez);
+								/*casasPossiveisJ2[i].tipo = jogadorDaVez.id;
 
 								var caminhos = t.todosCaminhos(casasPossiveisJ2[i], jogadorDaVez.id);
 						
@@ -260,7 +244,7 @@
 										x = caminhos[j][k].x;
 										y = caminhos[j][k].y;
 										t.casas[x][y].tipo = jogadorDaVez.id;
-									}
+									}*/
 
 								//jogadorDaVez = jogadorDaVez.passarVez();
 								//casasPossiveisJ1 = t.jogadasPossiveis(Tipo.JOGADOR1);
@@ -279,7 +263,6 @@
 
 								console.log("Casa possivel " + i + ": " + casasPossiveisJ2[i].y + " " + casasPossiveisJ2[i].x + ", que gera " + casasPossiveisJ1.length + " jogadas ao adversario");
 
-								//desfazerJogada(t);
 								t.restaurarTriplas(triplasAntigas, jogadorDaVez);
 
 								if(casasPossiveisJ1.length < melhorCasaQtdJogadas && quina == false){
@@ -294,26 +277,15 @@
 						console.log("A casa possivel " + melhorCasaId + " deve ser jogada");
 
 						jogadas.push(new Jogada(casasPossiveisJ2[melhorCasaId], t.obterTriplas(), jogadorDaVez)); 
-						casasPossiveisJ2[melhorCasaId].tipo = Tipo.JOGADOR2;
-						var caminhos = t.todosCaminhos(casasPossiveisJ2[melhorCasaId], jogadorDaVez.id);
-					
-						for (var i = 0; i < caminhos.length; i++)
-							for (var j = 0; j < caminhos[i].length; j++){
-								x = caminhos[i][j].x;
-								y = caminhos[i][j].y;
-								t.casas[x][y].tipo = jogadorDaVez.id;
-							}
-							
-						t.refresh();
-
-						if(melhorCasaQtdJogadas > 0){
-							jogadorDaVez = jogadorDaVez.passarVez();
-							t.mostrarPossiveis(jogadorDaVez.id);
-						}
-						else if(melhorCasaQtdJogadas == 0 && !t.fimDoJogo()){
-							iaJogando++;
+						
+						jogadorDaVez = t.jogar(casasPossiveisJ2[melhorCasaId], jogadorDaVez);
+						
+						iaJogando = false;
+						
+						if(melhorCasaQtdJogadas == 0 && !t.fimDoJogo()){
+							iaJogando = true;
 							console.log("O jogador passou a vez, pois nao havia mais jogadas");
-						}	
+						}
 					}				
 				}
 			}
