@@ -58,6 +58,7 @@
 <script src="Jogada.js"></script>
 <script>
 	window.onload = function(){
+		var start, end;
 		var jogadores = [new Jogador(), new Jogador()];
 		jogadores[1].tipo = Jogador.HUMANO;
 		jogadores[0].tipo = Jogador.IA2;
@@ -116,7 +117,9 @@
 		});
 		
 		if (t.jogadorDaVez.tipo != Jogador.HUMANO)
-			IA();	
+			IA();
+		else
+			start = performance.now();	
 		
 		function selecionarDiv(div){
 			//console.log(div);
@@ -135,6 +138,7 @@
 			// por enquanto funcionará, mas quando for necessário restaurar a quantidade de jogadas e pontos
 			// será necessária a cópia
 			t.jogar(casa);
+			t.jogadorDaVez.oponente.tempo += performance.now() - start;
 			IA();
 			//IA nivel 1
 			/*iaJogando = 1;
@@ -210,6 +214,7 @@
 			//IA nivel 2
 			while (ia2Jogando){ // || ia1jogando
 				if(t.jogadorDaVez.tipo == Jogador.IA2){
+					start = performance.now();
 					var casasPossiveisJ2 = t.jogadasPossiveis(t.jogadorDaVez.id);
 					var melhorCasaId = 0;
 					var melhorCasaQtdJogadas = 100;
@@ -265,6 +270,10 @@
 						
 						if (t.jogadorDaVez.tipo == Jogador.IA2)
 							ia2Jogando = true;
+						else{
+							t.jogadorDaVez.oponente.tempo += performance.now() - start;
+							start = performance.now();
+						}
 						
 						//if tipo Prox Jog == IA continua
 						/*if (t.fimDO
