@@ -319,12 +319,35 @@ Tabuleiro.prototype.jogar = function (casa) {
 	this.jogadas.push(new Jogada(casa, this.obterTriplas(), this.jogadorDaVez.clonar()));
 
 	this.simularJogada(casa);
-			
-	this.refresh();			
+	
+	this.refresh();
+				
+	// contar blocos
+	var contador1 = 0, contador2 = 0;	
+	for (var i = 0; i < this.casas.length; i++)	
+		for (var j = 0; j < this.casas[i].length; j++){
+			if (this.casas[i][j].tipo == Tipo.JOGADOR1)
+				contador1 ++;
+			else if (this.casas[i][j].tipo == Tipo.JOGADOR2)
+				contador2 ++;
+			}
+	if (this.jogadorDaVez.id == Tipo.JOGADOR1) {
+		this.jogadorDaVez.pontos = contador1;
+		this.jogadorDaVez.oponente.pontos = contador2;
+	} 
+	else {
+		this.jogadorDaVez.pontos = contador2;
+		this.jogadorDaVez.oponente.pontos = contador1;
+	}
+
+	//contar jogadas	
+	this.jogadorDaVez.jogadas++;
+	
 	
 	this.jogadorDaVez = this.jogadorDaVez.passarVez();
 	
 	this.mostrarPossiveis();
+	
 	
 	while (this.jogadasPossiveis(this.jogadorDaVez.id).length == 0){
 		if (this.fimDoJogo()) {
