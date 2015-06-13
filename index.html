@@ -4,8 +4,20 @@
 <head>
 <meta charset='utf-8'>
 <style>
+
+	@font-face {
+		font-family: larabieFont;
+		src: url(larabiefont_rg.ttf);
+	}
+
+	div#main {
+		display:flex;		
+		align-items:center;
+		justify-content:center;
+	}
+
 	#container{
-		margin: 10px auto 10px auto;
+		margin: 25px;
 	}
 		
 	.casa {
@@ -20,6 +32,24 @@
 	.casa0 { background-color: #CCC }
 	.casa1 { background-color: #3695D6 } 
 	.casa2 { background-color: #DC7538 }
+	
+	.jogador {
+		font-family: larabieFont;
+		padding: 15px;
+		border-radius: 15px
+	}
+	
+	.jogadorEspera {
+		border: rgba(0,0,0,0) solid 1px;
+	}	
+	
+	.jogador1Vez {
+		border: #3695D6 solid 1px;
+	}
+	
+	.jogador2Vez {
+		border: #DC7538 solid 1px;
+	}
 	
 	.jogador1 { color: #3695D6 } 
 	.jogador2 { color: #DC7538 }
@@ -60,8 +90,8 @@
 	window.onload = function(){
 		var start, end;
 		var jogadores = [new Jogador(), new Jogador()];
-		jogadores[0].tipo = Jogador.IA1; //modifique para Jogador.HUMANO para testar as outras possibilidades
-		jogadores[1].tipo = Jogador.IA2;
+		jogadores[0].tipo = Jogador.HUMANO; //modifique para Jogador.HUMANO para testar as outras possibilidades
+		jogadores[1].tipo = Jogador.HUMANO;
 		jogadores[0].oponente = jogadores[1];
 		jogadores[1].oponente = jogadores[0];
 		//console.log(jogadores);
@@ -270,7 +300,22 @@
 <body>
 	<p id="vez"></p>
 	
-	<div id="container">
+	<div id="main">
+		<div class="jogador jogador1 jogador1Vez">
+			Jogador 1 <br/><br/>
+			<span style="float:left">tempo:</span> <span style="float:right">10s</span> <br/>
+			<span style="float:left">pontos:</span> <span style="float:right">25</span> <br/>
+			<span style="float:left">#jogadas:</span> <span style="float:right">10</span> <br/>
+		</div>
+		<div id="container">
+		</div>
+		<div class="jogador jogador2 jogadorEspera">
+			Jogador 2 <br/><br/>
+			<span style="float:left">tempo:</span> <span style="float:right">524ms</span> <br/>
+			<span style="float:left">pontos:</span> <span style="float:right">19</span> <br/>
+			<span style="float:left">#jogadas:</span> <span style="float:right">11</span> <br/>
+		</div>		
+		
 	</div>
 			
 	<form>
