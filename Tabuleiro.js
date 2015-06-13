@@ -316,7 +316,7 @@ Tabuleiro.prototype.restaurarTriplas = function(triplas){
 }
 
 Tabuleiro.prototype.jogar = function (casa) {
-	this.jogadas.push(new Jogada(casa, this.obterTriplas(), this.jogadorDaVez.id));
+	this.jogadas.push(new Jogada(casa, this.obterTriplas(), this.jogadorDaVez.clonar()));
 
 	this.simularJogada(casa);
 			

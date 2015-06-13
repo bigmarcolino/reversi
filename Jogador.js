@@ -39,6 +39,7 @@ Jogador.prototype.clonar = function (){
 	oponente.jogadas = this.jogadas;
 	jogador.oponente = oponente;
 	oponente.oponente = jogador;
+	return jogador;
 }
 
 Jogador.prototype.jogar = function (tabuleiro){

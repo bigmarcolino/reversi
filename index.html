@@ -134,9 +134,6 @@
 		}
 		
 		function selecionarCasa(casa){
-			//TODO deve ser feita uma cópia de jogadorDaVez em vez de passar o objeto inteiro
-			// por enquanto funcionará, mas quando for necessário restaurar a quantidade de jogadas e pontos
-			// será necessária a cópia
 			t.jogar(casa);
 			t.jogadorDaVez.oponente.tempo += performance.now() - start;
 			IA();
@@ -275,51 +272,10 @@
 							start = performance.now();
 						}
 						
-						//if tipo Prox Jog == IA continua
-						/*if (t.fimDO
-						if(melhorCasaQtdJogadas == 0 && !t.fimDoJogo()){
-							iaJogando = true;
-							console.log("O jogador passou a vez, pois nao havia mais jogadas");
-						}*/
 					}				
 				}
 			}
 		}
-		
-		/*
-		function trocarjogadorDaVez(){
-			if (jogadorDaVez == Tipo.JOGADOR1)
-				jogadorDaVez = Tipo.JOGADOR2;
-			else
-				jogadorDaVez = Tipo.JOGADOR1;
-			$("#jogadorDaVez").text("Jogador " + jogadorDaVez);
-		}*/
-		
-		//console.log(t.vizinhosVazios(1));
-		
-		/*
-		console.log(t.existeCaminho(t.casas[4][3],t.casas[2][2]));
-		console.log(t.existeCaminho(t.casas[2][2],t.casas[4][3]));
-		console.log(t.existeCaminho(t.casas[2][2],t.casas[2][2]));
-		
-		console.log(t.existeCaminho(t.casas[3][4],t.casas[6][4]));
-		
-		console.log(t.existeCaminho(t.casas[3][7],t.casas[3][1]));
-		
-		console.log(t.existeCaminho(t.casas[7][7],t.casas[1][1]));
-		
-		console.log(t.existeCaminho(t.casas[5][3],t.casas[2][6]));
-		*/
-		
-		/*
-		console.log(t.caminho(t.casas[0][0], t.casas[7][7]));
-		console.log(t.caminho(t.casas[7][7], t.casas[0][0]));
-		console.log(t.caminho(t.casas[0][7], t.casas[1][6]));
-		console.log(t.caminho(t.casas[0][7], t.casas[0][7]));
-		*/
-		
-		//console.log(t.jogadasPossiveis(jogadorDaVez));
-		//console.log(t.toString());
 	};
 	
 	
