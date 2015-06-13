@@ -60,6 +60,8 @@
 	window.onload = function(){
 		var timer, a = 0, b = 0;
 		var jogadores = [new Jogador(), new Jogador()];
+		jogadores[1].tipo = Jogador.HUMANO;
+		jogadores[0].tipo = Jogador.IA2;
 		jogadores[0].oponente = jogadores[1];
 		jogadores[1].oponente = jogadores[0];
 		//console.log(jogadores);
@@ -124,7 +126,10 @@
 			console.log("tempo jogador vez " + t.jogadorDaVez.tempo + 
 			", oponente " + t.jogadorDaVez.oponente.tempo);
 			clearInterval(timer);
-		}	
+		}
+		
+		if (t.jogadorDaVez.tipo != Jogador.HUMANO)
+			IA();	
 		
 		function selecionarDiv(div){
 			//console.log(div);
@@ -144,7 +149,7 @@
 			// será necessária a cópia
 			comecarTimer();
 			t.jogar(casa);
-			
+			IA();
 			//IA nivel 1
 			/*iaJogando = 1;
 
@@ -212,11 +217,14 @@
 					}				
 				}
 			}*/
-			var iaJogando = t.jogadasPossiveis(Tipo.JOGADOR2).length > 0;
+		}
+		
+		function IA(){
+			var ia2Jogando = t.jogadorDaVez.tipo == Jogador.IA2 && t.jogadasPossiveis(t.jogadorDaVez.id).length > 0;
 			//IA nivel 2
-			while (iaJogando){
-				if(t.jogadorDaVez.id == 2){
-					var casasPossiveisJ2 = t.jogadasPossiveis(Tipo.JOGADOR2);
+			while (ia2Jogando){ // || ia1jogando
+				if(t.jogadorDaVez.tipo == Jogador.IA2){
+					var casasPossiveisJ2 = t.jogadasPossiveis(t.jogadorDaVez.id);
 					var melhorCasaId = 0;
 					var melhorCasaQtdJogadas = 100;
 					var quina = false;
@@ -267,10 +275,10 @@
 
 						console.log("A casa possivel " + melhorCasaId + " deve ser jogada");
 						t.jogar(casasPossiveisJ2[melhorCasaId]);
-						iaJogando = false;
+						ia2Jogando = false;
 						
-						if (t.jogadorDaVez.id == 2)
-							iaJogando = true;
+						if (t.jogadorDaVez.tipo == Jogador.IA2)
+							ia2Jogando = true;
 						
 						//if tipo Prox Jog == IA continua
 						/*if (t.fimDO
