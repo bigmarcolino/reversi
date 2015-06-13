@@ -135,7 +135,9 @@
 			//TODO deve ser feita uma cópia de jogadorDaVez em vez de passar o objeto inteiro
 			// por enquanto funcionará, mas quando for necessário restaurar a quantidade de jogadas e pontos
 			// será necessária a cópia
-			jogadas.push(new Jogada(casa, t.obterTriplas(), jogadorDaVez)); 
+			jogadas.push(new Jogada(casa, t.obterTriplas(), jogadorDaVez));
+			jogadorDaVez = t.jogar(casa, jogadorDaVez);
+			/* 
 			casa.tipo = jogadorDaVez.id;		
 			
 			var caminhos = t.todosCaminhos(casa, jogadorDaVez.id);
@@ -147,13 +149,12 @@
 					t.casas[x][y].tipo = jogadorDaVez.id;
 				}
 					
-			t.refresh();
-
-			
+			t.refresh();			
 			
 			jogadorDaVez = jogadorDaVez.passarVez();
 			t.mostrarPossiveis(jogadorDaVez.id);
-
+			*/
+			
 			//IA nivel 1
 			/*iaJogando = 1;
 

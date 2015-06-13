@@ -311,3 +311,28 @@ Tabuleiro.prototype.restaurarTriplas = function(triplas, jogador){
 	this.mostrarPossiveis(jogador.id);
 	this.refresh();		
 }
+
+Tabuleiro.prototype.jogar = function (casa, jogadorDaVez) {
+	this.simularJogada(casa, jogadorDaVez);
+			
+	this.refresh();			
+	
+	jogadorDaVez = jogadorDaVez.passarVez();
+	
+	this.mostrarPossiveis(jogadorDaVez.id);
+	
+	return jogadorDaVez;
+}
+
+Tabuleiro.prototype.simularJogada = function (casa, jogadorDaVez) {
+	casa.tipo = jogadorDaVez.id;		
+	
+	var caminhos = this.todosCaminhos(casa, jogadorDaVez.id);
+	
+	for (var i = 0; i < caminhos.length; i++)
+		for (var j = 0; j < caminhos[i].length; j++){
+			x = caminhos[i][j].x;
+			y = caminhos[i][j].y;
+			this.casas[x][y].tipo = jogadorDaVez.id;
+		}
+}
