@@ -206,7 +206,8 @@
 							t.jogadorDaVez.oponente.tempo += performance.now() - start;
 							start = performance.now();
 							if (t.jogadorDaVez.tipo != Jogador.HUMANO)
-								ia1Jogando = true;
+								if (t.jogadorDaVez.tipo == Jogador.IA1)
+									ia1Jogando = true;
 						}
 						
 					}				
@@ -248,8 +249,10 @@
 						else{
 							t.jogadorDaVez.oponente.tempo += performance.now() - start;
 							start = performance.now();
-							if (t.jogadorDaVez.tipo != Jogador.HUMANO)
-								ia2Jogando = true;							
+							if (t.jogadorDaVez.tipo != Jogador.HUMANO){
+								if (t.jogadorDaVez.tipo == Jogador.IA2)
+									ia2Jogando = true;						
+							}	
 						}
 					}				
 				}
