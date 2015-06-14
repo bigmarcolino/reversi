@@ -106,7 +106,7 @@
 		}, 500);*/
 		// ---------------------------------------------------
 
-		var t = new Tabuleiro("container", 455, 8);
+		var t = new Tabuleiro("container", 410, 8);
 		t.casas[3][3].tipo = Tipo.JOGADOR2;
 		t.casas[4][4].tipo = Tipo.JOGADOR2;
 		t.casas[3][4].tipo = Tipo.JOGADOR1;
@@ -301,19 +301,19 @@
 	<p id="vez"></p>
 	
 	<div id="main">
-		<div class="jogador jogador1 jogador1Vez">
-			Jogador 1 <br/><br/>
-			<span style="float:left">tempo:</span> <span style="float:right">10s</span> <br/>
-			<span style="float:left">pontos:</span> <span style="float:right">25</span> <br/>
-			<span style="float:left">#jogadas:</span> <span style="float:right">10</span> <br/>
+		<div id="statusJogador1" class="jogador jogador1">
+			<span id="nome1"> </span> <br/><br/>
+			<span style="float:left">tempo:</span> <span id="tempo1" style="float:right">0s</span> <br/>
+			<span style="float:left">pontos:</span> <span id="pontos1" style="float:right">2</span> <br/>
+			<span style="float:left">#jogadas:</span> <span id="jogadas1" style="float:right">0</span> <br/>
 		</div>
 		<div id="container">
 		</div>
-		<div class="jogador jogador2 jogadorEspera">
-			Jogador 2 <br/><br/>
-			<span style="float:left">tempo:</span> <span style="float:right">524ms</span> <br/>
-			<span style="float:left">pontos:</span> <span style="float:right">19</span> <br/>
-			<span style="float:left">#jogadas:</span> <span style="float:right">11</span> <br/>
+		<div id="statusJogador2" class="jogador jogador2">
+			<span id="nome2"> </span> <br/><br/>
+			<span style="float:left">tempo:</span> <span id="tempo2" style="float:right">0ms</span> <br/>
+			<span style="float:left">pontos:</span> <span id="pontos2" style="float:right">2</span> <br/>
+			<span style="float:left">#jogadas:</span> <span id="jogadas2" style="float:right">0</span> <br/>
 		</div>		
 		
 	</div>
