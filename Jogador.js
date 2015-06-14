@@ -16,16 +16,14 @@ function Jogador (){
 }
 
 Jogador.prototype.passarVez = function (){
-	$("#vez").text("Jogador " + this.oponente.id);
-	$("#vez").removeClass();
-	$("#vez").addClass("jogador" + this.oponente.id);
-	this.updateHTML();
+	this.trocarHTML();
+	this.updateHTMLJogadores();
 	console.log(this);
 	console.log(this.oponente);
 	return this.oponente;
 }
 
-Jogador.prototype.updateHTML = function (){
+Jogador.prototype.trocarHTML = function(){
 	if (this.oponente.id == Tipo.JOGADOR1){
 		$("#statusJogador1").addClass("jogador1Vez");
 		$("#statusJogador1").removeClass("jogadorEspera");
@@ -38,6 +36,9 @@ Jogador.prototype.updateHTML = function (){
 		$("#statusJogador1").addClass("jogadorEspera");		
 		$("#statusJogador1").removeClass("jogador1Vez");
 	}
+}
+
+Jogador.prototype.updateHTMLJogadores = function (){
 	
 	var nome, tempo, pontos, jogadas, id;
 	var jogadores = new Array(this, this.oponente);
@@ -61,9 +62,9 @@ Jogador.prototype.updateHTML = function (){
 		}
 		
 		$("#nome"+id).text(nome);
-		$("#tempo"+id).text(tempo);
-		$("#pontos"+id).text(pontos);
-		$("#jogadas"+id).text(jogadas);						
+		$("#tempo"+id).html("&nbsp;"+tempo);
+		$("#pontos"+id).html("&nbsp;"+pontos);
+		$("#jogadas"+id).html("&nbsp;"+jogadas);						
 	}
 }
 
