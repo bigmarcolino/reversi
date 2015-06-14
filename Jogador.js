@@ -52,9 +52,9 @@ Jogador.prototype.updateHTML = function (){
 			tempo = parseInt(jogadores[j].tempo/1000.0)+"s";
 		}
 		else {
-			if (jogadores[j].tipo == JogadorIA1)
+			if (jogadores[j].tipo == Jogador.IA1)
 				nome = "IA1";
-			else if (jogadores[j].tipo == JogadorIA2)
+			else if (jogadores[j].tipo == Jogador.IA2)
 				nome = "IA2";
 			tempo = parseInt(jogadores[j].tempo)+"ms";
 							
