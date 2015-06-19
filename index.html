@@ -291,14 +291,19 @@
 					break;
 			}
 		}
-		raiz = new No(10);
-		raiz.addFilho(new No(5));
-		raiz.addFilho(new No(6));
-		raiz.addFilho(new No(7));
+
+		// TESTE árvores
+
+		raiz = new No();
+		raiz.addFilho(new No());
+		raiz.addFilho(new No());
+		raiz.filhos[0].addFilho(new No(5));
 		raiz.filhos[0].addFilho(new No(4));
-		raiz.filhos[0].addFilho(new No(3));
-		raiz.filhos[2].addFilho(new No(9));
-		raiz.filhos[2].filhos[0].addFilho(new No(0));
+		raiz.filhos[0].addFilho(new No(1));
+		raiz.filhos[1].addFilho(new No());
+		raiz.filhos[1].addFilho(new No(3));
+		raiz.filhos[1].filhos[0].addFilho(new No(2));
+		minimax(raiz);
 		raiz.percorrer();
 	};
 
