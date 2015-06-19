@@ -11,7 +11,7 @@
 	}
 
 	div#main {
-		display:flex;		
+		display:flex;
 		align-items:center;
 		justify-content:center;
 	}
@@ -19,7 +19,7 @@
 	#container{
 		margin: 25px;
 	}
-		
+
 	.casa {
 		display: flex;
 		justify-content: center; /* align horizontal */
@@ -28,32 +28,32 @@
 		float:left;
 		border: #BBB solid 1px;
 	}
-	
+
 	.casa0 { background-color: #CCC }
-	.casa1 { background-color: #3695D6 } 
+	.casa1 { background-color: #3695D6 }
 	.casa2 { background-color: #DC7538 }
-	
+
 	.jogador {
 		font-family: larabieFont;
 		padding: 15px;
 		border-radius: 15px
 	}
-	
+
 	.jogadorEspera {
 		border: rgba(0,0,0,0) solid 1px;
-	}	
-	
+	}
+
 	.jogador1Vez {
 		border: #3695D6 solid 1px;
 	}
-	
+
 	.jogador2Vez {
 		border: #DC7538 solid 1px;
 	}
-	
-	.jogador1 { color: #3695D6 } 
+
+	.jogador1 { color: #3695D6 }
 	.jogador2 { color: #DC7538 }
-	
+
 	.possivel {
 		background-color: #CDC;
 		display: flex;
@@ -63,25 +63,26 @@
 		float:left;
 		border: #BBB solid 1px;
 	}
-	
+
 	.casa:hover {
 		background-color: #E03535;
 	}
-	
-	.possivel:hover {	
+
+	.possivel:hover {
 		background-color: #34A55E;
 	}
-	
+
 	/*.casa-top-left { border-top-left-radius: 25px }
 	.casa-top-right { border-top-right-radius: 25px }
 	.casa-bottom-left { border-bottom-left-radius: 25px; }
 	.casa-bottom-right { border-bottom-right-radius: 25px; }*/
-	
+
 </style>
 
 <script src="jquery-2.1.4.js"></script>
 <script src="hashtable.js"></script>
 <script src="hashset.js"></script>
+<script src="No.js"></script>
 <script src="Casa.js"></script>
 <script src="Tabuleiro.js"></script>
 <script src="Jogador.js"></script>
@@ -95,7 +96,7 @@
 		jogadores[0].oponente = jogadores[1];
 		jogadores[1].oponente = jogadores[0];
 		//console.log(jogadores);
-	
+
 		// ---------------------------------------------------
 		/*var  v = ["", ".", "..", "..."];
 		var i = 0;
@@ -115,23 +116,23 @@
 		/*t.casas[4][3].tipo = Tipo.JOGADOR1;
 		t.casas[4][4].tipo = Tipo.JOGADOR1;
 		t.casas[4][5].tipo = Tipo.JOGADOR1;
-		
+
 		t.casas[3][3].tipo = Tipo.JOGADOR2;
 		t.casas[3][4].tipo = Tipo.JOGADOR2;
 		t.casas[3][5].tipo = Tipo.JOGADOR2;	*/
-		
-		t.jogadorDaVez = jogadores[1].passarVez();	
-		
+
+		t.jogadorDaVez = jogadores[1].passarVez();
+
 		t.mostrarPossiveis();
 		t.refresh();
-		
-		for (var i = 0; i < t.casas.length; i++)	
+
+		for (var i = 0; i < t.casas.length; i++)
 			for (var j = 0; j < t.casas[i].length; j++){
 				t.casas[i][j].div.addEventListener("click", function(event){
 					selecionarDiv(event.target);
-				});	
+				});
 			}
-		/*	
+		/*
 		document.forms[0].desfazer.addEventListener("click", function(){
 			t.desfazerJogada();
 		});
@@ -145,30 +146,30 @@
 			}
 			t.refresh();
 		});
-		
+
 		if (t.jogadorDaVez.tipo != Jogador.HUMANO)
 			IA();
 		else
-			start = performance.now();	
-		
+			start = performance.now();
+
 		function selecionarDiv(div){
 			//console.log(div);
 			var x, y;
 			var num = div.id.substring(div.id.length - 2, div.id.length);
 			x = parseInt(num.charAt(0));
 			y = parseInt(num.charAt(1));
-			
+
 			var casa = t.casas[x][y];
 			if (t.jogadaValida(casa))
 				selecionarCasa(casa);
 		}
-		
+
 		function selecionarCasa(casa){
 			t.jogar(casa);
 			t.jogadorDaVez.oponente.tempo += performance.now() - start;
 			IA();
 		}
-		
+
 		function IA(){
 
 			var ia1Jogando = t.jogadorDaVez.tipo == Jogador.IA1 && t.jogadasPossiveis(t.jogadorDaVez.id).length> 0;
@@ -199,9 +200,9 @@
 				        	}
 				        	else{
 								t.simularJogada(casasPossiveisJ2[i]);
-								
+
 								casasPossiveisJ1 = t.jogadasPossiveis(t.jogadorDaVez.oponente.id);
-								
+
 								for (var j = 0; j < casasPossiveisJ1.length; j++){
 									if(casasPossiveisJ1[j].y == 0 && casasPossiveisJ1[j].x == 0 ||
 				        	   		   casasPossiveisJ1[j].y == 0 && casasPossiveisJ1[j].x == 7 ||
@@ -229,7 +230,7 @@
 						console.log("A casa possivel " + melhorCasaId + " deve ser jogada");
 						t.jogar(casasPossiveisJ2[melhorCasaId]);
 						ia2Jogando = false;
-						
+
 						if (t.jogadorDaVez.tipo == Jogador.IA2)
 							ia2Jogando = true;
 						else{
@@ -239,8 +240,8 @@
 								if (t.jogadorDaVez.tipo == Jogador.IA1)
 									ia1Jogando = true;
 						}
-						
-					}				
+
+					}
 				}
 				else if(t.jogadorDaVez.tipo == Jogador.IA1){
 					start = performance.now();
@@ -273,7 +274,7 @@
 
 						t.jogar(casasPossiveisJ2[melhorCasaId]);
 						ia1Jogando = false;
-						
+
 						if (t.jogadorDaVez.tipo == Jogador.IA1)
 							ia1Jogando = true;
 						else{
@@ -281,18 +282,27 @@
 							start = performance.now();
 							if (t.jogadorDaVez.tipo != Jogador.HUMANO){
 								if (t.jogadorDaVez.tipo == Jogador.IA2)
-									ia2Jogando = true;						
-							}	
+									ia2Jogando = true;
+							}
 						}
-					}				
+					}
 				}
 				if (t.fimDoJogo())
 					break;
 			}
 		}
+		raiz = new No(10);
+		raiz.addFilho(new No(5));
+		raiz.addFilho(new No(6));
+		raiz.addFilho(new No(7));
+		raiz.filhos[0].addFilho(new No(4));
+		raiz.filhos[0].addFilho(new No(3));
+		raiz.filhos[2].addFilho(new No(9));
+		raiz.filhos[2].filhos[0].addFilho(new No(0));
+		raiz.percorrer();
 	};
-	
-	
+
+
 
 </script>
 </head>
@@ -312,18 +322,18 @@
 			<span style="float:left">tempo:</span> <span id="tempo2" style="float:right">0ms</span> <br/>
 			<span style="float:left">pontos:</span> <span id="pontos2" style="float:right">2</span> <br/>
 			<span style="float:left">#jogadas:</span> <span id="jogadas2" style="float:right">0</span> <br/>
-		</div>		
-		
+		</div>
+
 	</div>
-	
-	<!--		
+
+	<!--
 	<form>
 		<input type="button" name="desfazer" value="Desfazer jogada" />
 	</form>
 	-->
-			
+
 	<pre id="loading">
 	</pre>
-	
+
 </body>
 </html>
