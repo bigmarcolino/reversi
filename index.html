@@ -292,7 +292,7 @@
 			}
 		}
 
-		// TESTE árvores
+		// TESTE árvore minimax
 
 		raiz = new No();
 		raiz.addFilho(new No());
@@ -302,7 +302,7 @@
 		raiz.filhos[0].addFilho(new No(1));
 		raiz.filhos[1].addFilho(new No());
 		raiz.filhos[1].addFilho(new No(3));
-		raiz.filhos[1].filhos[0].addFilho(new No(2));
+		raiz.filhos[1].filhos[0].addFilho(new No(0));
 		minimax(raiz);
 		raiz.percorrer();
 	};

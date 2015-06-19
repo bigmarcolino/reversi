@@ -18,8 +18,14 @@ No.prototype.percorrer = function() {
 };
 
 function percorrerRecursivo (no){
-	//console.log("Valor: " + no.valor + ", nivel: " + no.nivel);
+	/*
+	if (no.nivel % 2 == 0)
+		no.valor = no.max;
+	else
+		no.valor = no.min;
+	*/
 	console.log("Valor: " + no.valor + ", nivel: " + no.nivel + ", max: " + no.max + ", min: " + no.min);
+	//console.log("Valor: " + no.valor + ", nivel: " + no.nivel);
 	if (no.filhos.length == 0)
 		return;
 
