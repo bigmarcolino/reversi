@@ -1,10 +1,15 @@
-function No(valor){
-	this.valor = valor === undefined ? null : valor;
+function No(triplas, triplasPossiveis, i, j){
+	this.valor = Tabuleiro.avaliar(triplasPossiveis);
 	this.nivel = 0;
 	this.pai = null;
 	this.filhos = new Array();
 	this.max = this.valor;
 	this.min = this.valor;
+	this.triplas = triplas;
+	this.triplasPossiveis = triplasPossiveis;
+	// coordenadas da jogada que originou esse tabuleiro
+	this.jogada_i = i;
+	this.jogada_j = j;
 }
 
 No.prototype.addFilho = function(no) {

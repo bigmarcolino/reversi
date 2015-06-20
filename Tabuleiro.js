@@ -302,10 +302,10 @@ Tabuleiro.prototype.obterTriplas = function (){
 }
 
 Tabuleiro.prototype.obterTriplasPossiveis = function (jogador){
-	var jogadasPossiveis = this.jogadasPossiveis(jogador);
+	var jogPossiveis = this.jogadasPossiveis(jogador);
 	var triplas = new Array();
-	for (var i = 0; i < jogadasPossiveis.length; i++)
-		triplas.push(new Array(this.jogadasPossiveis[j].x, jogadasPossiveis[j].y, jogadasPossiveis[j].tipo));
+	for (var i = 0; i < jogPossiveis.length; i++)
+		triplas.push(new Array(jogPossiveis[i].x, jogPossiveis[i].y, jogPossiveis[i].tipo));
 
 	return triplas;
 }
